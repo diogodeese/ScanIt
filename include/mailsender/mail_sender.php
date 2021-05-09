@@ -156,9 +156,11 @@
                                 padding-top: 80px;
                             }
 
-                            p-b-37{
+                            .p-b-37{
                                 padding-bottom: 37px;
                             }
+
+                            .ExternalClass {width: 100%;}
 
 
 		</style>
