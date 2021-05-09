@@ -77,7 +77,7 @@
 
 					<div class="text-center">
 					<!-- PATH:  -->
-						<a href="asking_4_mail.php" class="txt2 hov1">
+						<a href="asking_4_mail" class="txt2 hov1">
 							Click here!
 						</a>
 					</div>

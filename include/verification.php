@@ -183,9 +183,40 @@ if (isset($_POST['mail']))
 			$_SESSION['mail_error'] += 1;
 			header('location: ../asking_4_mail.php');
 		}
-
 	}
 
+
+	#asking_4_code.php
+	if(isset($_POST['insert_code_forgot_password'])) {
+		$code = $_POST['code'];
+		$email = $_GET['email'];
+
+		if(!empty($code)) {
+			if(is_numeric($code)) {
+				$code_check = "SELECT password_code FROM users WHERE email LIKE '$email' LIMIT 1";
+				$results = mysqli_query($db, $code_check);
+
+				if(mysqli_num_rows($results) > 0 ) {
+					echo "És bueda fixe";
+					//header('Location: mailsender/mail_sender.php?email='.$email.'&&nome='.$row[0].'&&type=forgot_pass');
+				} else {
+					#Goes back to the asking_4_mail.php
+					$_SESSION['mail_error'] += 1;
+					header('location: ../index.php');
+				}
+
+			} else {
+				#Goes back to the asking_4_mail.php
+				$_SESSION['mail_error'] += 1;
+				header('location: ../asking_4_code.php');
+			}
+
+		} else {
+			#Goes back to the asking_4_mail.php
+			$_SESSION['mail_error'] += 1;
+			header('location: ../asking_4_code.php');
+		}
+	}
 
 	
 
