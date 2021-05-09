@@ -64,7 +64,7 @@
 					</div>
 
 					<div class="text-center">
-						<a href="singup.php" class="txt2 hov1">
+						<a href="sing-up" class="txt2 hov1">
 							Sign up
 						</a>
 					</div>
@@ -77,7 +77,7 @@
 
 					<div class="text-center">
 					<!-- PATH:  -->
-						<a href="asking_4_mail" class="txt2 hov1">
+						<a href="utility-pages/change-password/cp-email-input" class="txt2 hov1">
 							Click here!
 						</a>
 					</div>

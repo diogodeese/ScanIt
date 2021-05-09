@@ -5,7 +5,7 @@
 	unset($_SESSION['login_error']);
 	unset($_SESSION['mail_error']);
 		
-	require_once("db_conn.php");
+	require_once("database_connection.php");
 	
 	#Register
 	if (isset($_POST['register'])) 
@@ -49,7 +49,6 @@
 
 					#Password encryptation for security
 					$pass = md5($pass1);
-
 					$code =  rand(1000,9999);
 					
 					#Saving the account in the DB
@@ -61,7 +60,7 @@
 					$_SESSION['user']  = $user;
 					$_SESSION['email'] = $email;
 					
-					header('Location: ../index.php');#CHANGE TO HOME.PHP
+					header('Location: ../index.php');#CHANGE TO INDEX.PHP
 		
 				}
 
@@ -217,12 +216,4 @@ if (isset($_POST['mail']))
 			header('location: ../asking_4_code.php');
 		}
 	}
-
-	
-
-
-
-
-
-
 ?>
