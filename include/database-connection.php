@@ -1,5 +1,1 @@
-<?php
-
-    $db = new mysqli ('localhost' , 'root' , '' , 'db')
-
-?>
+<?php $db = new mysqli ('localhost' , 'root' , '' , 'db') ?>

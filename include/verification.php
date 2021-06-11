@@ -1,17 +1,17 @@
 <?php
 	session_start();
 
-	unset($_SESSION['singup_error']);
+	unset($_SESSION['signup_error']);
 	unset($_SESSION['login_error']);
 	unset($_SESSION['mail_error']);
 		
-	require_once("database_connection.php");
+	require("database-connection.php");
 	
 	#Register
 	if (isset($_POST['register'])) 
 		{	
 			unset($_POST['register']);
-			$_SESSION['singup_error'] = 0;
+			$_SESSION['signup_error'] = 0;
 			
 			#Recive the inputs
 			$user  = mysqli_real_escape_string($db, $_POST["user"]);
@@ -20,11 +20,11 @@
 			$pass2 = mysqli_real_escape_string($db, $_POST["pass2"]);
 			
 			#Verify the inputs
-			if(empty($user))     { $_SESSION['singup_error'] += 1; }
-			if(empty($email))    { $_SESSION['singup_error'] += 1; }
-			if(empty($pass1))    { $_SESSION['singup_error'] += 1; }
-			if(empty($pass2))    { $_SESSION['singup_error'] += 1; }
-			if($pass1 != $pass2) { $_SESSION['singup_error'] += 1; }
+			if(empty($user))     { $_SESSION['signup_error'] += 1; }
+			if(empty($email))    { $_SESSION['signup_error'] += 1; }
+			if(empty($pass1))    { $_SESSION['signup_error'] += 1; }
+			if(empty($pass2))    { $_SESSION['signup_error'] += 1; }
+			if($pass1 != $pass2) { $_SESSION['signup_error'] += 1; }
 			
 			#Username and email check
 			$user_check = "SELECT * FROM users WHERE username='$user' OR email='$email' LIMIT 1";
@@ -34,18 +34,18 @@
 			#If Username or email exists
 			if ($username) 
 				{ 
-					if($username['username'] === $user) $_SESSION['singup_error'] += 1;
-					if($username['email'] === $email)   $_SESSION['singup_error'] += 1;
+					if($username['username'] === $user) $_SESSION['signup_error'] += 1;
+					if($username['email'] === $email)   $_SESSION['signup_error'] += 1;
 				}
 
-			if($_SESSION['singup_error'] > 0)
+			if($_SESSION['signup_error'] > 0)
 				{
-					header('location: ../singup.php');
+					header('location: ../sign-up.php');
 				}
-			#Verifies the singup_error
-			if ($_SESSION['singup_error'] == 0) 
+			#Verifies the signup_error
+			if ($_SESSION['signup_error'] == 0) 
 				{
-					unset($_SESSION['singup_error']);
+					unset($_SESSION['signup_error']);
 
 					#Password encryptation for security
 					$pass = md5($pass1);
@@ -60,10 +60,9 @@
 					$_SESSION['user']  = $user;
 					$_SESSION['email'] = $email;
 					
-					header('Location: ../index.php');#CHANGE TO INDEX.PHP
+					header('Location: ../index');
 		
 				}
-
 		}
 
 #Login
@@ -73,11 +72,11 @@ if (isset($_POST['login']))
 		$_SESSION['login_error'] = 0;
 
 		#Recive the inputs
-		$user = mysqli_real_escape_string($db, $_POST['username']);
+		$username = mysqli_real_escape_string($db, $_POST['username']);
 		$pass = mysqli_real_escape_string($db, $_POST['password']);
 
 		#Verifys if it's empty
-		if (empty($user)) { $_SESSION['login_error'] += 1; }
+		if (empty($username)) { $_SESSION['login_error'] += 1; }
 		if (empty($pass)) { $_SESSION['login_error'] += 1; }
 
 		#If there is no erros the changes in the db will be made
@@ -85,7 +84,7 @@ if (isset($_POST['login']))
 			{
 				#Password encryptation for security
 				$password = md5($pass);
-				$query = "SELECT * FROM users WHERE username like '$user' AND password like '$password'";
+				$query = "SELECT * FROM users WHERE username like '$username' AND password like '$password'";
 				$results = mysqli_query($db, $query);
 
 				#If there are an account 
@@ -94,20 +93,20 @@ if (isset($_POST['login']))
 						unset($_SESSION['login_error']);
 
 						#Saves the user and the mail in the session
-						$_SESSION['user']  = $user;
-						header('location: ../password.php');#CHANGE TO HOME.PHP
+						$_SESSION['username'] = $username;
+						header('location: ../home-pages/home');
 					}
 				else
 					{
 						#Goes back to the index
 						$_SESSION['login_error'] += 1;
-						header('location: ../index.php');
+						header('location: ../index');
 					}
 			}
 		else
 			{
 				$_SESSION['login_error'] += 1;
-				header('location: ../index.php');
+				header('location: ../index');
 			}
 	}
 

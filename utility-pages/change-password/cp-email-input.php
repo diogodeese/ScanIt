@@ -15,7 +15,7 @@
 	<body>
 	
 		<!-- =============================== IMAGE =============================== -->
-		<div class="container-login" style="background-image: url('../../images/wll.jpg');">
+		<div class="container-login" style="background-image: url('../../images/main-wallpaper.jpg');">
 		<!-- ===================================================================== -->
 
 			<div class="wrap-login p-l-55 p-r-55 p-t-80 p-b-30">

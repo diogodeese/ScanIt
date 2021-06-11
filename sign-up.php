@@ -26,15 +26,15 @@
 ?>
 
 
-		<div class="container-login" style="background-image: url('images/wll.jpg');">
+		<div class="container-login" style="background-image: url('images/main-wallpaper.jpg');">
 			<div class="wrap-login p-l-55 p-r-55 p-t-80 p-b-30">
 				<form class="login-form" action="include/verification.php" method="POST">
 				
 					<span class="login-form-title p-b-37">
-						Sing Up
+						Sign Up
 					</span>
 					
-					<div class="txt-error p-b-10">
+											<div class="txt-error p-b-10">
 						<?php
 							require_once("include/text_error.php");
 						?>
