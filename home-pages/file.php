@@ -44,6 +44,9 @@
             ";
 
             $arrayCounter++;
+            
+            echo "<a href='$filePath$row[name]' download>Download</a>";
+       
         }
     } else {
         echo "Sem items";

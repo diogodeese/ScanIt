@@ -163,23 +163,23 @@ if (isset($_POST['mail']))
 					$code = rand(1000, 9999);
 					$sql = "UPDATE users SET password_code = '$code' WHERE email LIKE '$email'";
 					$results = mysqli_query($db, $sql);
-					header('Location: mailsender/mail_sender.php?email='.$email.'&&nome='.$row[0].'&&type=forgot_pass');
+					header('Location: mailsender/email-sender.php?email='.$email.'&&nome='.$row[0].'&&type=forgot_pass');
 				} else {
 					#Goes back to the asking_4_mail.php
 					$_SESSION['mail_error'] += 1;
-					header('location: ../asking_4_mail.php');
+					header('location: ../utility-pages/change-password/cp-email-input');
 				}
 
 			} else {
 				#Goes back to the asking_4_mail.php
 				$_SESSION['mail_error'] += 1;
-				header('location: ../asking_4_mail.php');
+				header('location: ../utility-pages/change-password/cp-email-input');
 			}
 
 		} else {
 			#Goes back to the asking_4_mail.php
 			$_SESSION['mail_error'] += 1;
-			header('location: ../asking_4_mail.php');
+			header('location: ../utility-pages/change-password/cp-email-input');
 		}
 	}
 
@@ -187,32 +187,22 @@ if (isset($_POST['mail']))
 	#asking_4_code.php
 	if(isset($_POST['insert_code_forgot_password'])) {
 		$code = $_POST['code'];
-		$email = $_GET['email'];
+		$email = $_POST['email'];
 
 		if(!empty($code)) {
-			if(is_numeric($code)) {
-				$code_check = "SELECT password_code FROM users WHERE email LIKE '$email' LIMIT 1";
-				$results = mysqli_query($db, $code_check);
+			$code_check = "SELECT password_code FROM users WHERE email LIKE '$email' LIMIT 1";
+			$results = mysqli_query($db, $code_check);
 
-				if(mysqli_num_rows($results) > 0 ) {
-					echo "És bueda fixe";
-					//header('Location: mailsender/mail_sender.php?email='.$email.'&&nome='.$row[0].'&&type=forgot_pass');
-				} else {
-					#Goes back to the asking_4_mail.php
-					$_SESSION['mail_error'] += 1;
-					header('location: ../index.php');
-				}
-
+			if(mysqli_num_rows($results) > 0 ) {
+				header('Location: ../utility-pages/change-password/change-password?email='.$email.'&nome='.$row[0].'&type=forgot_pass');
 			} else {
-				#Goes back to the asking_4_mail.php
 				$_SESSION['mail_error'] += 1;
-				header('location: ../asking_4_code.php');
+				header('location: ../utility-pages/code-input.php?email='.$email.'&button=forgot_pass');
 			}
 
 		} else {
-			#Goes back to the asking_4_mail.php
 			$_SESSION['mail_error'] += 1;
-			header('location: ../asking_4_code.php');
+			header('location: ../utility-pages/code-input.php?email='.$email.'&button=forgot_pass');
 		}
 	}
 ?>

@@ -1,9 +1,6 @@
-
-
-
-
 <?php
 
+    ob_start();
     //Import PHPMailer classes into the global namespace
     //These must be at the top of your script, not inside a function
     use PHPMailer\PHPMailer\PHPMailer;
@@ -14,7 +11,7 @@
     require 'phpmailer/vendor/autoload.php';
 
     //Database Connection
-    require '../db_conn.php'; 
+    require '../database-connection.php'; 
 
     $email = $_GET['email'];
     $username = $_GET['nome'];
@@ -171,7 +168,7 @@
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         
-       header('location: ../../asking_4_code.php?email='.$email);
+       
     }
     
 
@@ -179,15 +176,14 @@
 
     switch($email_type) {
         case 'forgot_pass': 
-            
             password_recover($email, $username, $db);
-            
-            break;
+            header('location: ../../utility-pages/code-input.php?email='.$email.'&button=forgot_pass');
+        break;
 
         default:
             break;
     }
 
     
-
+    ob_end_flush();
 ?>
