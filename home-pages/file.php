@@ -7,7 +7,7 @@
 ?>
 
     <center>
-        <a href="trash">Lixo</a>
+        <a href="home">Home</a>
         <a href="../include/logout.php">Logout</a>
 
         <?php echo "<br><br><br><br>".$_SESSION['username']."<br><br><br>"; ?>
@@ -34,6 +34,7 @@
         while($row = $result->fetch_assoc()) {	
             
             $unic_link = $row['unic_link'];
+            $_SESSION['fileName'] = $row['name'];
 
             echo "<tr>
                     <td> ".$row["id"]."  </td>
@@ -46,22 +47,26 @@
             $arrayCounter++;
             
             echo "<a href='$filePath$row[name]' download>Download</a>";
-       
+
         }
     } else {
         echo "Sem items";
     }
-    
+  
+    $host= gethostname();
+    $ip = gethostbyname($host);
+
+    $qrCodeUrl = "http://".$ip."/pap-30-05/home-pages/download.php?path=".$filePath.$_SESSION['fileName'];
+
 ?>
 
-    <button onclick="generateQR()">dasd</button>
     <div id="qrcode"></div>
 
 <script src="../js/qrcode.min.js"></script>
 <script>
 
     window.onload = function generateQR() {
-        urlValue = 'file.php?page=<?php echo $unic_link ?>'
+        urlValue = window.location.assign = "<?php echo $qrCodeUrl; ?>";
         var qrCode = new QRCode(document.getElementById('qrcode'));
         qrCode.makeCode(urlValue);
     }

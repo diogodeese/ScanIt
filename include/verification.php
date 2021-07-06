@@ -4,9 +4,10 @@
 	unset($_SESSION['signup_error']);
 	unset($_SESSION['login_error']);
 	unset($_SESSION['mail_error']);
+	
 		
 	require("database-connection.php");
-	
+
 	#Register
 	if (isset($_POST['register'])) 
 		{	
@@ -59,7 +60,12 @@
 					#Saves the user and the email in the session
 					$_SESSION['user']  = $user;
 					$_SESSION['email'] = $email;
+
+					chdir("../home-pages/uploads/");
+					$curdir = getcwd();
 					
+					mkdir($curdir."/".$_SESSION['user'], 0777);
+
 					header('Location: ../index');
 		
 				}
@@ -110,8 +116,8 @@ if (isset($_POST['login']))
 			}
 	}
 
-#Mail
-if (isset($_POST['mail']))
+	#Mail
+	if (isset($_POST['mail']))
 	{
 		unset($_POST['mail']);
 		$_SESSION['mail_error'] = 0;
@@ -194,7 +200,7 @@ if (isset($_POST['mail']))
 			$results = mysqli_query($db, $code_check);
 
 			if(mysqli_num_rows($results) > 0 ) {
-				header('Location: ../utility-pages/change-password/change-password?email='.$email.'&nome='.$row[0].'&type=forgot_pass');
+				header('Location: ../utility-pages/change-password/change-password?email='.$email.'&type=forgot_pass');
 			} else {
 				$_SESSION['mail_error'] += 1;
 				header('location: ../utility-pages/code-input.php?email='.$email.'&button=forgot_pass');
@@ -205,4 +211,34 @@ if (isset($_POST['mail']))
 			header('location: ../utility-pages/code-input.php?email='.$email.'&button=forgot_pass');
 		}
 	}
+
+	#change-password
+	if(isset($_POST['change_password'])) {
+
+		$pass1 = $_POST['pass1'];
+		$pass2 = $_POST['pass2'];
+		$email = $_POST['email'];
+
+		if(!empty($pass1)) {
+			if(!empty($pass2)) {
+				if($pass1 === $pass2) {
+
+					$password = md5($pass1);
+
+					$sql = "UPDATE users SET password = '$password' WHERE email LIKE '$email'";
+					$results = mysqli_query($db, $sql);
+
+					header('Location: ../index');
+
+				} else {
+					echo "diferentes";
+				}
+			} else {
+				echo "pass2 vazia";
+			}
+		} else {
+			echo "pass1 vazia";
+		}
+	}
+
 ?>

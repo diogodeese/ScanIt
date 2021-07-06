@@ -6,7 +6,7 @@
     echo $user['id'];
 
     //File Upload
-	$filePath = 'uploads/';
+	$filePath = 'uploads/'.$_SESSION['username']."/";
 
 	if(isset($_FILES['file'])) {
 	    $file = $_FILES['file'];
@@ -21,8 +21,6 @@
         //File Extension
         $fileExt = explode('.', $fileName);
         $fileActualExt = strtolower(end($fileExt));
-
-        
 
         //File Verification
         $allowedExt = array('jpg', 'jpeg', 'png', 'pdf');
@@ -46,12 +44,10 @@
                     else echo "Erro: " . $sql . "<br>" . $db->error;
 
                     header('Location: home');
-
+                    
                 } else echo "Your file is too big";
             } else echo "There was an error uploading your file";
         } else echo "This file extension is not allowed";
-
-        
 	}
 
 ?>
