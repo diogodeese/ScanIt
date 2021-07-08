@@ -1,5 +1,6 @@
 <?php 
 
+    session_start();
     require('../../include/database-connection.php');
 	
     $option = $_GET['options'];
@@ -28,16 +29,15 @@
 
         case 'delete':
 
-            $filePath = 'uploads/';
+            $filePath = 'uploads/'.$_SESSION['username'].'/';
             $id = $_GET['id'];
             $name = $_GET['name'];
             $filePath = $filePath.$name;
 
+            unlink("../".$filePath);
+
             $sql = "DELETE FROM files WHERE id='$id'";
 
-            if(!unlink($filePath)) { echo "You have an error!"; } 
-            else { header("Location: ../trash"); }
-            
             if ($db->query($sql) === TRUE) { header('location: ../trash'); } 
             else { echo "Erro ao apagar o registo: " . $db->error; }
 

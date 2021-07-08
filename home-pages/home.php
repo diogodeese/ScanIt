@@ -23,6 +23,13 @@
 
     require('include/file-creation.php');
 
+    function formatBytes($size, $precision = 2) {
+        $base = log($size, 1024);
+        $suffixes = array('', 'K', 'M', 'G', 'T');   
+
+        return round(pow(1024, $base - floor($base)), $precision) .' '. $suffixes[floor($base)];
+    }
+
     $sql = "SELECT id, name, date_upload, unic_link FROM files WHERE id_users = $user[id] AND active = 1";
     $result = $db->query($sql);
 
@@ -31,8 +38,11 @@
             <tr>
                 <th> ID </th>
                 <th> Imagem </th>
+                <th> Nome </th>
                 <th> Data </th>
                 <th> Apagar </th>
+                <th> Link </th>
+                <th> Size </th>
             </tr>
         "; 
 
@@ -43,10 +53,12 @@
 
             echo "<tr>
                     <td> ".$row["id"]."  </td>
-                    <td> <a href=file.php?page=".$row['unic_link']."&id=".$arrayCounter." onclick='generateQR($arrayCounter)'><img src=".$filePath.$row['name']." width='500' height='400'></a></td>
+                    <td> <a href=file.php?page=".$row['unic_link']."&id=".$arrayCounter." onclick='generateQR($arrayCounter)'><img src=".$filePath.$row['name']." style='height: 100px; width: 100px; object-fit: cover; object-position: center center;'></a></td>
+                    <td> ".$row['name']." </td>
                     <td> ".$row["date_upload"]." </td>
                     <td> <a href=include/options.php?options=remove&id=".$row['id']."><button> Apagar </button></a> </td>
                     <td><p>".$urlValue[$arrayCounter]."</p></td>
+                    <td><p>".formatBytes(filesize($filePath.$row['name']))."</p></td>
                 </tr>
             ";
 

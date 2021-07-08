@@ -23,7 +23,7 @@
         $fileActualExt = strtolower(end($fileExt));
 
         //File Verification
-        $allowedExt = array('jpg', 'jpeg', 'png', 'pdf');
+        $allowedExt = array('jpg', 'jpeg', 'png');
 
         if (in_array($fileActualExt, $allowedExt)) {
             if($fileError === 0) {

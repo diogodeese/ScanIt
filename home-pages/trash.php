@@ -37,14 +37,14 @@
             </tr>"; 
                     
         while($row = $result->fetch_assoc()) {	
-					
             echo "<tr>
 					<td> ".$row["id"]."  </td>
-					<td> <img src=".$filePath.$row['name']." width='500' height='400'> </td>
+					<td> <img src=".$filePath.$_SESSION['username']."/".$row['name']." style='height: 250px; width: 250px; object-fit: cover; object-position: center center;'> </td>
 					<td> ".$row["date_upload"]." </td>
 					<td> <a href=include/options.php?options=recover&id=".$row['id']."><button> Recuperar </button></a> </td>
                     <td> <a href=include/options.php?options=delete&id={$row['id']}&name={$row['name']}><button> Remover </button></a>
-                 </tr>";
+                 </tr>
+            ";
         }
     } else {
         echo "sem items";

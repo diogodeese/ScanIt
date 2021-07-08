@@ -138,7 +138,6 @@ if (isset($_POST['login']))
 				if (mysqli_num_rows($results) > 0 )
 					{
 						unset($_SESSION['mail_error']);
-						echo shell_exec("mailsender.py pass.php " .$mail);
 					}
 				else
 					{
