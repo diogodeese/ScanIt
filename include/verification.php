@@ -1,18 +1,11 @@
 <?php
-	session_start();
 
-	unset($_SESSION['signup_error']);
-	unset($_SESSION['login_error']);
-	unset($_SESSION['mail_error']);
-	
-		
+	session_start();		
 	require("database-connection.php");
 
 	#Register
 	if (isset($_POST['register'])) 
 		{	
-			unset($_POST['register']);
-			$_SESSION['signup_error'] = 0;
 			
 			#Recive the inputs
 			$user  = mysqli_real_escape_string($db, $_POST["user"]);
@@ -20,100 +13,102 @@
 			$pass1 = mysqli_real_escape_string($db, $_POST["pass1"]);
 			$pass2 = mysqli_real_escape_string($db, $_POST["pass2"]);
 			
-			#Verify the inputs
-			if(empty($user))     { $_SESSION['signup_error'] += 1; }
-			if(empty($email))    { $_SESSION['signup_error'] += 1; }
-			if(empty($pass1))    { $_SESSION['signup_error'] += 1; }
-			if(empty($pass2))    { $_SESSION['signup_error'] += 1; }
-			if($pass1 != $pass2) { $_SESSION['signup_error'] += 1; }
-			
-			#Username and email check
-			$user_check = "SELECT * FROM users WHERE username='$user' OR email='$email' LIMIT 1";
-			$result     = mysqli_query($db, $user_check);
-			$username   = mysqli_fetch_assoc($result);
+			if(!empty($user)) {
+				if(!empty($email)) {
+					if(!empty($pass1)) {
+						if(!empty($pass2)) {
+							if($pass1 === $pass2) {
 
-			#If Username or email exists
-			if ($username) 
-				{ 
-					if($username['username'] === $user) $_SESSION['signup_error'] += 1;
-					if($username['email'] === $email)   $_SESSION['signup_error'] += 1;
+								#Username and email check
+								$user_check = "SELECT * FROM users WHERE username LIKE '$user' OR email LIKE '$email' LIMIT 1";
+								$result = $db->query($user_check);
+
+								#If Username or email exists
+								if ($result->num_rows > 0) {
+									$row = $result->fetch_assoc();
+									if($row['email'] === $email) header('Location: ../sign-up?error_type=email_exists');
+									if($row['username'] === $user) header('Location: ../sign-up?error_type=user_exists');
+									exit();
+								}
+
+								#Password encryptation for security
+								$pass = md5($pass1);
+								$code =  rand(1000,9999);
+									
+								#Saving the account in the DB
+								$query = "INSERT INTO users ( username, email, password, creation_date, active, activation_code)
+								VALUES('$user',  '$email', '$pass', NOW(), 'FALSE', '$code')";
+								mysqli_query($db, $query);
+									
+								#Saves the user and the email in the session
+								$_SESSION['user']  = $user;
+								$_SESSION['email'] = $email;
+
+								chdir("../home-pages/uploads/");
+								$curdir = getcwd();
+									
+								mkdir($curdir."/".$_SESSION['user'], 0777);
+								header('Location: ../index');
+
+							} else {
+								header('Location: ../sign-up?error_type=different_passwords');
+							}
+										
+						} else {
+							header('Location: ../sign-up?error_type=empty_pass2');
+						}
+
+					} else {
+						header('Location: ../sign-up?error_type=empty_pass1');
+					}
+	
+				} else {
+					header('Location: ../sign-up?error_type=empty_email');
 				}
+	
+			} else {
+				header('Location: ../sign-up?error_type=empty_user');
+			}
 
-			if($_SESSION['signup_error'] > 0)
-				{
-					header('location: ../sign-up.php');
-				}
-			#Verifies the signup_error
-			if ($_SESSION['signup_error'] == 0) 
-				{
-					unset($_SESSION['signup_error']);
 
-					#Password encryptation for security
-					$pass = md5($pass1);
-					$code =  rand(1000,9999);
-					
-					#Saving the account in the DB
-					$query = "INSERT INTO users ( username, email, password, creation_date, active, activation_code)
-					VALUES('$user',  '$email', '$pass', NOW(), 'FALSE', '$code')";
-					mysqli_query($db, $query);
-					
-					#Saves the user and the email in the session
-					$_SESSION['user']  = $user;
-					$_SESSION['email'] = $email;
 
-					chdir("../home-pages/uploads/");
-					$curdir = getcwd();
-					
-					mkdir($curdir."/".$_SESSION['user'], 0777);
-
-					header('Location: ../index');
-		
-				}
 		}
 
-#Login
-if (isset($_POST['login']))
-	{
-		unset($_POST['login']);
-		$_SESSION['login_error'] = 0;
-
+	#Login
+	if (isset($_POST['login'])) {
 		#Recive the inputs
 		$username = mysqli_real_escape_string($db, $_POST['username']);
 		$pass = mysqli_real_escape_string($db, $_POST['password']);
 
-		#Verifys if it's empty
-		if (empty($username)) { $_SESSION['login_error'] += 1; }
-		if (empty($pass)) { $_SESSION['login_error'] += 1; }
+		if(!empty($username)) {
+			if(!empty($pass)) {
+				$sql_user = "SELECT * FROM users WHERE username LIKE '$username'";
+				$results_user = mysqli_query($db, $sql_user);
+				if (mysqli_num_rows($results_user) > 0 ) {
+					$password = md5($pass); 
+					$sql_pass = "SELECT * FROM users WHERE username LIKE '$username' AND password LIKE '$password'";
+					$results_pass = mysqli_query($db, $sql_pass);
+					if (mysqli_num_rows($results_pass) > 0 ) {
 
-		#If there is no erros the changes in the db will be made
-		if ($_SESSION['login_error'] == 0)
-			{
-				#Password encryptation for security
-				$password = md5($pass);
-				$query = "SELECT * FROM users WHERE username like '$username' AND password like '$password'";
-				$results = mysqli_query($db, $query);
+						$row = mysqli_fetch_row($results_pass);
+						$_SESSION['username']  = $username;
+						header('Location: ../home-pages/home');
 
-				#If there are an account 
-				if (mysqli_num_rows($results) > 0 )
-					{
-						unset($_SESSION['login_error']);
-
-						#Saves the user and the mail in the session
-						$_SESSION['username'] = $username;
-						header('location: ../home-pages/home');
+					} else {
+						header('Location: ../index?error_type=wrong_pass');
 					}
-				else
-					{
-						#Goes back to the index
-						$_SESSION['login_error'] += 1;
-						header('location: ../index');
-					}
+
+				} else {
+					header('Location: ../index?error_type=wrong_user');
+				}
+
+			} else {
+				header('Location: ../index?error_type=empty_pass');
 			}
-		else
-			{
-				$_SESSION['login_error'] += 1;
-				header('location: ../index');
-			}
+
+		} else {
+			header('Location: ../index?error_type=empty_user');
+		}
 	}
 
 	#Mail

@@ -11,21 +11,11 @@
 		<link rel="stylesheet" href="css/util.css">
 <!-- ========================================================================== -->
 
-		<script>
-			document.getElementById("error").style.borderColor = "red";
-		</script>
-
-
 	</head>
 
 	<body>
 
-<?php 
-	session_start();
-
-	unset($_SESSION['signup_error']);
-	unset($_SESSION['mail_error']);
-?>
+	<?php session_start(); ?>
 
 		<div class="container-login" style="background-image: url('images/main-wallpaper.jpg');">
 			<div class="wrap-login p-l-55 p-r-55 p-t-80 p-b-30">
@@ -36,18 +26,43 @@
 					</span>
 					
 					<div class="txt-error p-b-10">
-						<?php
-							require_once("include/text_error.php");
+						<?php	
+
+							if(isset($_GET['error_type'])) { 
+
+								$error_type = $_GET['error_type'];
+
+								switch($error_type) {
+
+									case 'empty_user': 
+											echo "Empty Username";
+										break;
+
+									case 'empty_pass': 
+											echo "Empty Password";
+										break;
+
+									case 'wrong_user': 
+											echo "This Username does not exist";
+										break;
+
+									case 'wrong_pass': 
+											echo "Wrong Password";
+										break;
+
+								}
+							}
+
 						?>
 					</div>
 					
 					<div class="wrap-input validate-input  m-b-20" data-validate="Enter username or email">
-						<input id="1" class=" input" type="text" name="username" placeholder="username">
+						<input id="login_username" class=" input" type="text" name="username" placeholder="username">
 						<span class="focus-input"></span>
 					</div>
 					
 					<div class="wrap-input validate-input m-b-25" data-validate = "Enter password">
-						<input id="2" class="input" type="password" name="password" placeholder="password">
+						<input id="login_password" class="input" type="password" name="password" placeholder="password">
 						<span class="focus-input"></span>
 					</div>
 					
@@ -76,27 +91,60 @@
 					</div>
 
 					<div class="text-center">
-					<!-- PATH:  -->
 						<a href="utility-pages/change-password/cp-email-input" class="txt2 hov1">
 							Click here!
 						</a>
 					</div>
-					
-				</form>
-				
-			</div>
-			
+				</form>	
+			</div>	
 		</div>	
 
-<?php 
-	
-	if(isset($_SESSION['login_error'])) 
-		{
-			require_once("include/border_error.php");
+	<?php 
+
+		if(isset($_GET['error_type'])) { 
+
+			switch($error_type) {
+
+				case 'empty_user': 
+						?>
+							<script>
+								document.getElementById("login_username").style.border = "1px solid #f00";
+								document.getElementById("login_username").style.borderRadius = "20px";
+							</script>
+						<?php
+					break;
+
+				case 'empty_pass': 
+						?>
+							<script>
+								document.getElementById("login_password").style.border = "1px solid #f00";
+								document.getElementById("login_password").style.borderRadius = "20px";
+							</script>
+						<?php
+					break;
+
+				case 'wrong_user': 
+						?>
+							<script>
+								document.getElementById("login_username").style.border = "1px solid #f00";
+								document.getElementById("login_username").style.borderRadius = "20px";
+							</script>
+						<?php
+					break;
+
+				case 'wrong_pass': 
+						?>
+							<script>
+								document.getElementById("login_password").style.border = "1px solid #f00";
+								document.getElementById("login_password").style.borderRadius = "20px";
+							</script>
+						<?php
+					break;
+
+			}
 		}
-	
-	unset($_SESSION['login_error']);
-?>		
+
+	?>		
 		
 	</body>
 </html>
