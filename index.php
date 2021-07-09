@@ -49,7 +49,6 @@
 									case 'wrong_pass': 
 											echo "Wrong Password";
 										break;
-
 								}
 							}
 
@@ -140,7 +139,6 @@
 							</script>
 						<?php
 					break;
-
 			}
 		}
 

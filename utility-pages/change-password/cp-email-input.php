@@ -27,7 +27,7 @@
 					</span>
 						
 					<div class="wrap-input validate-input  m-b-20" data-validate="Enter email">
-						<input id="1" class=" input" type="text" name="email" placeholder="email" required>
+						<input id="change_password_email" class=" input" type="text" name="email" placeholder="email" required>
 						<span class="focus-input"></span>
 					</div>
 						

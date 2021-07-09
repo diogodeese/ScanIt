@@ -47,8 +47,8 @@
         "; 
 
         $arrayCounter = 0;
-        while($row = $result->fetch_assoc()) {	
-            
+        while($row = $result->fetch_assoc()) {
+         
             $urlValue[$arrayCounter] = 'file.php?page='.$row['unic_link'];
 
             echo "<tr>
