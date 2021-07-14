@@ -1,3 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt">
+	<head>
+		<title> ScanIt </title>
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+<!-- ======================= CSS ======================== -->
+		<link rel="stylesheet" href="../css/page.css">		
+		<link rel="stylesheet" href="../css/util.css">		
+		<link rel="stylesheet" href="../css/table.css">
+        <link rel="stylesheet" href="../include/fontawesome/css/all.css">
+<!-- ==================================================== -->
+
+</head>
+
 <?php
 
     session_start();

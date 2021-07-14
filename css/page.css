@@ -1,0 +1,650 @@
+
+/*--------------------FONTS-----------------------*/
+
+@font-face {
+	font-family: SourceSansPro-Regular;
+	src: url('/mail_html/fonts/source-sans-pro/SourceSansPro-Regular.ttf'); 
+}
+
+@font-face {
+	font-family: SourceSansPro-Bold;
+	src: url('/mail_html/fonts/source-sans-pro/SourceSansPro-Bold.ttf'); 
+}
+
+@font-face {
+	font-family: SourceSansPro-SemiBold;
+	src: url('/mail_html/fonts/source-sans-pro/SourceSansPro-SemiBold.ttf'); 
+}
+
+@font-face {
+	font-family: JosefinSans-Bold;
+	src: url('/mail_html/fonts/JosefinSans/JosefinSans-Bold.ttf'); 
+}
+
+/*--------------------FONTS-----------------------*/
+
+
+
+/*------------------MAIN CSS----------------------*/
+
+*{
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+
+body,html{
+	height: 100vh;
+	width: 100%;
+	font-family: SourceSansPro-Regular, sans-serif;
+}
+
+a {
+	font-family: SourceSansPro-Regular;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #666666;
+	margin: 0px;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+  	-o-transition: all 0.4s;
+  	-moz-transition: all 0.4s;
+}
+
+a.white {
+	color: #fff;
+}
+
+a:focus {
+	outline: none !important;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	margin: 0px;
+}
+
+p {
+	font-family: SourceSansPro-Regular;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #666666;
+	margin: 0px;
+}
+
+input {
+	outline: none;
+	border: none;
+}
+
+textarea {
+	outline: none;
+	border: none;
+}
+
+textarea:focus, input:focus {
+	border-color: transparent !important;
+}
+
+input::-webkit-input-placeholder { color: #4b2354;}
+input:-moz-placeholder { color: #4b2354;}
+input::-moz-placeholder { color: #4b2354;}
+input:-ms-input-placeholder { color: #4b2354;}
+
+textarea::-webkit-input-placeholder { color: #4b2354;}
+textarea:-moz-placeholder { color: #4b2354;}
+textarea::-moz-placeholder { color: #4b2354;}
+textarea:-ms-input-placeholder { color: #4b2354;}
+
+.txt1 {
+  font-family: SourceSansPro-Regular;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #999999;
+}
+
+.hov1:hover {
+  color: #4b2354;
+  text-decoration: underline;
+}
+
+/*------------------MAIN CSS----------------------*/
+
+
+/*------------------PAGE CONTAINER----------------------*/
+
+.page-container {
+	width: 100%;
+	height: 100%;
+	min-height: 100vh;
+	max-height: fit-content;
+	min-width: 100vw;
+	max-width: fit-content;
+	margin: 0px;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	overflow: hidden;
+	padding: 0px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	z-index: 1;
+}
+
+.page-container::before {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(93,84,240,0.5);
+	background: -webkit-linear-gradient(left, rgba(0,168,255,0.5), rgba(185,0,255,0.5));
+	background: -o-linear-gradient(left, rgba(0,168,255,0.5), rgba(185,0,255,0.5));
+	background: -moz-linear-gradient(left, rgba(0,168,255,0.5), rgba(185,0,255,0.5));
+	background: linear-gradient(left, rgba(0,168,255,0.5), rgba(185,0,255,0.5));
+	pointer-events: none;
+}
+
+/*------------------PAGE CONTAINER----------------------*/
+
+
+/*------------------MENU CONTAINER----------------------*/
+
+.menu-container{
+	display: inline-block;
+	margin: 0px;
+	min-height: 100vh;
+	max-height: fit-content;
+	min-width: fit-content;
+	max-width: fit-content;
+	width: 100%;
+	background-color: #e9e9e9;
+}
+
+/*------------------MENU CONTAINER----------------------*/
+
+
+/*------------------MENU TEXT----------------------*/
+
+.menu-text{	
+	height: 10vh;
+	width: 100%;
+	display: inline-block;
+	font-family: SourceSansPro-Bold;
+	font-size: 51px;
+	color: #4b2354;
+	text-align: center;
+	text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+
+}
+
+/*------------------MENU TEXT----------------------*/
+
+
+/*------------------MENU BAR----------------------*/
+
+.menu-bar{
+	padding-left: auto;
+	padding-right: auto;
+	width: 100%;
+	height: 100%;
+	text-align: right;
+	justify-content: right;
+
+}
+
+.menu-bar-a {
+	max-height: fit-content;
+	width: 100%;
+	overflow: hidden;
+	width: fit-content;
+	float: right;
+}
+  
+.menu-bar a {
+	width: 100%;
+	height: 100%;
+	font-family: SourceSansPro-Regular;
+	color: #999999;
+	font-size: 30px;
+	text-decoration: none;
+	display: block;
+}
+  
+.menu-bar a:hover {
+	color: black;
+	
+}
+  
+.menu-bar a.active {
+	/*color: #00A8FF;*/
+	color: #bd59d4;
+  }
+
+.red-txt{
+	color: #f00 !important;
+
+}  
+  
+
+/*------------------MENU BAR----------------------*/
+
+
+/*------------------CONTENT CONTAINER----------------------*/
+
+.content-container {
+	display: inline-block;
+	width: 100%;
+	min-height: fit-content;
+	margin: 0px 20px 0px 20px;
+	border-radius: 0px;
+	background:linear-gradient(#fff, #fff) no-repeat 0px 13.44086021vh;
+}
+
+/*------------------CONTENT CONTAINER----------------------*/
+
+
+/*-----------------CONTAINER HEADER------------------------*/
+
+.container-header{
+	background-color: #fff;
+	margin: 20px 0px 0px 0px;
+	padding: 10px 20px 10px 20px;
+	height: 9.857vh;
+}
+
+
+/*-----------------CONTAINER HEADER------------------------*/
+
+
+
+
+
+/*-----------------SEARCH CONTAINER-------------------------
+
+.search-container{
+	width: 70%;
+	border: 1px solid red;
+	height: 100%;
+	display: block;
+	
+}
+
+/*-----------------SEARCH CONTAINER-------------------------*/
+
+
+/*------------------SEARCH BAR-------------------------
+
+.search-bar{
+	overflow: hidden;
+	width: 50%;
+	margin: 0 auto;
+	display:block;
+}
+
+.search-bar input[type=text] {
+	padding: 6px;
+	border: 1px solid black;
+	font-size: 17px;
+	width: 100%;
+}
+
+/*------------------SEARCH BAR-------------------------*/
+
+
+/*-------------------SEARCH FEATURES-----------------*/
+
+.header-features{
+	width: 70%;
+	height: fit-content;
+	display: inline-block;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.ddr_search{
+	height: 35px;
+	margin: 0px; 	
+	background: -webkit-linear-gradient(top, #8f44a2, #70357e);
+	border: 0;
+	color: #f5edf7;
+	width: 20px;
+	vertical-align: top;
+}
+
+.ddr_search:hover{
+	background: -webkit-linear-gradient(bottom, #8f44a2, #70357e);
+}
+
+.ddr_search-text{
+	color: #000;
+}
+
+/*-------------------SEARCH FEATURES-----------------*/
+
+
+/*----------------CHECK BOX AND SORT BY--------------*/
+
+.chkBox-sort{
+	height: 35px;
+	display: inline-block;
+	position: relative;
+}
+
+/*----------------CHECK BOX AND SORT BY--------------*/
+
+
+/*---------------------CHECKBOX---------------------*/
+
+.chkBox_container{
+	position: relative;
+	padding-left: 35px;
+	margin: 0px;
+	cursor: pointer;
+	font-size: 24px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.chkBox_container input{
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+
+.checkmark {
+	position: absolute;
+	display: inline-block;
+	top: 0;
+	left: 0;
+	height: 35px;
+	width: 35px;
+	background-color: #eee;
+	border: 2px solid #70357e;
+	border-right: 1px solid black;
+	margin-top: 0px;
+	vertical-align: top;
+}
+
+.chkBox_container:hover input ~ .checkmark {
+  	background-color: #ccc;
+}
+
+.chkBox_container input:checked ~ .checkmark {
+  	background: -webkit-linear-gradient(top, #70357e, #4f265a);
+}
+
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+.chkBox_container input:checked ~ .checkmark:after {
+  	display: block;
+}
+
+.chkBox_container .checkmark:after {
+	left: 9px;
+	top: 4px;
+	width: 7px;
+	height: 14px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+/*---------------------CHECKBOX---------------------*/
+
+
+
+/*--------------------UPLOAD CONTAINER---------------------*/
+
+.upload-container{
+	display: inline-block;
+		margin-top: 0px;
+		vertical-align: top;
+}
+
+/*--------------------UPLOAD CONTAINER---------------------*/
+
+
+/*--------------------CHOSE FILE-------------------------*/
+
+.btn_chose-file{
+	background: -webkit-linear-gradient(top, #8f44a2, #70357e);
+	color: #f5edf7;
+	font-size: 17px;
+	padding: 0px 8px 0px 8px;
+	cursor: pointer;
+	display: inline-block;
+	height: 35px;
+	border: none;
+}
+
+.btn_chose-file:active{
+	outline: 0;
+}
+
+.btn_chose-file:hover {
+	background: -webkit-linear-gradient(bottom, #8f44a2, #70357e);
+}
+
+/*--------------------CHOSE FILE-------------------------*/
+
+
+/*-----------------BUTTON UPLOAD-----------------------*/
+
+.btn_send-file{
+	position: absolute;
+	margin: 0px;
+	padding-left: 0px;
+	height: 35px;
+	display: inline-block;
+	vertical-align: top;
+	border-left: 1px solid black;
+	padding: 0px 8px 0px 8px;
+	background: -webkit-linear-gradient(top, #8f44a2, #70357e);
+	color: #f5edf7;
+	max-width: 110px !important;
+	text-overflow: ellipsis;
+	overflow: hidden;  
+	white-space: nowrap;
+}
+
+.btn_send-file:hover {
+	background: -webkit-linear-gradient(bottom, #8f44a2, #70357e);
+}
+
+.btn_send-file:disabled{
+	/*background: -webkit-linear-gradient(top, #ecdbf0, #d9b7e1);*/
+	background: -webkit-linear-gradient(top, #ccc, #b3b3b3);
+	color: black;
+	border-left: 1px solid black;
+}
+
+
+/*-----------------BUTTON UPLOAD-----------------------*/
+
+.delete{
+	/*display: inline-block;*/
+	height: 35px;
+	width: fit-content;
+	display: inline-block;
+	margin-top: 0px;
+	vertical-align: top;
+}
+
+.btn_delete{
+	background: -webkit-linear-gradient(top, #8f44a2, #70357e);
+	height: 100%;
+	padding: 0px 8px 0px 8px;
+	border: 0;
+	color: #f5edf7;
+}
+
+.btn_delete:hover{
+	background: -webkit-linear-gradient(bottom, #9f4bb4, #7f3c90);
+}
+
+.btn_delete:disabled{
+	background: -webkit-linear-gradient(top, #ccc, #b3b3b3);
+	padding: 0px 8px 0px 8px;
+	border: 0;
+	color: #f5edf7;
+}
+
+/*-------------------DELETE BUTTON-------------------*/
+
+
+/*-----------------HEADER ACCOUNT INFO----------------*/
+
+.header-account-info{
+	width: 30%;
+	display: block;
+	height: 100%;
+	position: relative;
+	float: right;
+}
+
+/*-----------------HEADER ACCOUNT INFO----------------*/
+
+
+/*----------------ACCOUNT NAME-----------------------*/
+
+.account-name{
+	font-size: 17px;
+	color:#000;
+	vertical-align: middle; 
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	padding-left: 80px;
+	display: inline-block;
+}
+/*----------------ACCOUNT NAME-----------------------*/
+
+/*----------------ACCOUNT SETTINGS---------------*/
+
+.account-settings{
+	float:right;
+	display:block;
+	color:#333;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	padding-right: 20px;
+	width: fit-content;
+}
+
+.account-settings i{
+	float:left;
+	color: #000;
+}
+
+.account-settings span{
+	font-size: 14px;
+	display: block;
+}
+
+/*SETTINGS BOX*/
+
+.settings-box{
+	position: absolute;
+	width: 140px;
+	height: 120px;
+	border: 1px solid black;
+	z-index: 5;
+	right: 45px;
+	top: 51px;
+	background-color: #e9e9e9;
+	/*background: -webkit-linear-gradient(top, #70357e, #4f265a);*/
+}
+
+.settings-box a{
+	position: relative;
+	top: 25%;
+	transform: translateY(-50%);
+	text-decoration: none;
+}
+
+.change-box{
+	height: 40px;
+	width: 100%;
+	color: #000;
+	font-size: 14px;
+	padding-left: 12px; 
+	vertical-align: middle;
+}
+
+/*SETTINGS BOX END*/
+
+/*----------------ACCOUNT SETTINGS---------------*/
+
+
+/*-----------------DYNAMIC CONTAINER-----------------*/
+
+.dynamic-container{
+
+	width: 100%;
+	height: 100%;
+	margin-top: 1.851851851vh;
+	overflow-y: auto;
+}
+
+/*-----------------DYNAMIC CONTAINER-----------------*/
+
+
+/*-----------------TABLE CONTAINER---------------*/
+
+.table-container{
+	display: block;
+}
+
+/*-----------------TABLE CONTAINER---------------*/
+
+.header-text{
+	position: relative;
+	left: 50%;
+	color: #70357e;
+	font-size: 30px;
+}
+
+/*===================PAGE ABOUT=================*/
+
+.about-text-container{
+	text-align:justify; 
+	text-justify:inter-word;
+}
+
+.about-title{
+	font-size: 22px;
+	color: #9f4bb4;
+}
+
+.about-text{
+	font-size: 17px;
+	color: black;
+}
+
+/*===================PAGE ABOUT=================*/
+
+.trigger{
+	text-decoration: none;
+}

@@ -1,0 +1,429 @@
+@font-face {
+	font-family: SourceSansPro-Regular;
+	src: url('../fonts/source-sans-pro/SourceSansPro-Regular.ttf'); 
+}
+
+/*------------------MAIN CSS----------------------*/
+
+*{
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+
+body,html{
+	min-height: 100vh;
+	min-width: 100vw;
+    max-height: 100vh;
+	font-family: SourceSansPro-Regular, sans-serif;
+    /*overflow-y:scroll;*/
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+a {
+	font-family: SourceSansPro-Regular;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #666666;
+	margin: 0px;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+  	-o-transition: all 0.4s;
+  	-moz-transition: all 0.4s;
+}
+
+a.white {
+	color: #fff;
+}
+
+a:focus {
+	outline: none !important;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	margin: 0px;
+}
+
+p {
+	font-family: SourceSansPro-Regular;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #666666;
+	margin: 0px;
+}
+
+input {
+	outline: none;
+	border: none;
+}
+
+textarea {
+	outline: none;
+	border: none;
+}
+
+textarea:focus, input:focus {
+	border-color: transparent !important;
+}
+
+input::-webkit-input-placeholder { color: #4b2354;}
+input:-moz-placeholder { color: #4b2354;}
+input::-moz-placeholder { color: #4b2354;}
+input:-ms-input-placeholder { color: #4b2354;}
+
+textarea::-webkit-input-placeholder { color: #4b2354;}
+textarea:-moz-placeholder { color: #4b2354;}
+textarea::-moz-placeholder { color: #4b2354;}
+textarea:-ms-input-placeholder { color: #4b2354;}
+
+.txt1 {
+  font-family: SourceSansPro-Regular;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #999999;
+}
+
+.hov1:hover {
+  color: #4b2354;
+}
+
+/*------------------MAIN CSS----------------------*/
+
+/*-------------------PAGE CONTAINER---------------*/
+
+.page-container{
+    width: 100%;
+    height: 100%;
+    min-width: 100vw;
+    min-height: 100vh;
+	display: -moz-box;
+	display: -ms-flexbox;
+	overflow: hidden;
+	padding: 0px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	z-index: 1;
+}
+
+.page-container::before {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(93,84,240,0.5);
+	background: -webkit-linear-gradient(left, rgba(0,168,255,0.5), rgba(185,0,255,0.5));
+	background: -o-linear-gradient(left, rgba(0,168,255,0.5), rgba(185,0,255,0.5));
+	background: -moz-linear-gradient(left, rgba(0,168,255,0.5), rgba(185,0,255,0.5));
+	background: linear-gradient(left, rgba(0,168,255,0.5), rgba(185,0,255,0.5));
+	pointer-events: none;
+}
+
+
+/*-------------------PAGE CONTAINER---------------*/
+
+/*-----------------HEADER CONTAINER--------------*/
+
+.header-container{
+    height: 15vh;
+    width: 100%;
+    display: block;
+    border-bottom: 7px solid #4b2354;
+    background-color: #fff;
+}
+
+.header-container:after{
+    background-color: #fff;
+}
+
+/*-----------------HEADER CONTAINER--------------*/
+
+/*------------------HEADER TITLE-----------------*/
+
+.header-title{
+    width: 80%;
+    height: 100%;
+    text-align:center;
+    color: #4b2354;
+    font-size: 100px;
+    display: inline-block;
+    padding-left: 10vw;
+}
+
+/*------------------HEADER TITLE-----------------*/
+
+
+/*-----------------HEADER LOGIN REGISTER CONTAINER----------*/
+
+.header-login-register-container{ 
+    width: 20%;
+    height: 15vh;
+    display: inline-block;
+    position: absolute;
+}
+
+/*-----------------HEADER LOGIN REGISTER CONTAINER----------*/
+
+
+/*---------------------HEADER LOGIN REGISTER-----------------*/
+
+.header-login-register{
+    width: 100%;
+    height: 35px;
+    position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+    display: inline-block;
+}
+
+.header-login-register span{
+    font-size: 14px;
+}
+
+/*---------------------HEADER LOGIN REGISTER-----------------*/
+
+
+/*-----------------------HEADER TEXT----------------------*/
+
+.header-text{
+    display: inline-block;
+}
+
+/*-----------------------HEADER TEXT----------------------*/
+
+
+/*----------------------HEADER LOGIN--------------------*/
+
+.header-login a{
+    text-decoration: none; 
+    color: #4b2354;
+    font-size: 20px;
+}
+
+.header-login a:hover{
+    text-decoration: underline; 
+}
+
+
+/*-----------------------HEADER REGISTER-------------------*/
+
+.header-register{
+    width: fit-content;
+}
+
+.btn_register{
+	background: -webkit-linear-gradient(top, #70357e, #4f265a);
+	height: 100%;
+	padding: 3px 20px 3px 20px;
+	border: 0;
+	color: #f5edf7;
+    font-size: 26px;
+    border-radius: 20px;
+}
+
+.btn_register:hover{
+	background: -webkit-linear-gradient(bottom, #70357e, #4f265a);
+}
+
+/*-----------------------HEADER REGISTER-------------------*/
+
+
+/*-----------------------CONTENT CONTAINER----------------*/
+
+.content-container{
+    width: 100%;
+    height: fit-content;
+    position: relative;
+    display: block;
+}
+
+/*-----------------------CONTENT CONTAINER----------------*/
+
+
+/*-----------------------CONTENT BOXES---------------------*/
+
+.sub-title{
+    height: fit-content;
+
+    float: left;
+
+
+    border: 3px solid #4b2354;
+    background-color: #fff;
+    padding: 10px;
+    border-left: 0;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    color: #70357e;
+    font-size: 50px;
+}
+
+.sub-title-text{
+    color: #000;
+    font-size: 30px;
+}
+
+.content-box{
+    display: flex;
+    width: 51%;
+    min-height: 60vh;
+    max-height: fit-content;
+    position: relative;
+    border: 4px solid #4b2354;
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 30px;
+    overflow: hidden;
+}
+
+
+
+/* ~GENERAL FOR GRIDS~ */
+.grid-text{
+    color: #000;
+    font-size: 25px;
+}
+
+.grid-text a{
+    color: #4b2354;
+    font-size: 25px;
+    text-decoration: none;
+}
+
+.grid-text a:hover{
+    text-decoration: underline;
+}
+
+.middle-align-grid{
+    position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.img_grid img{
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+/* ~GENERAL FOR GRIDS END~ */
+
+
+/* == FIRST BOX == */
+
+.first-box{
+    float: right;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-right: 0;
+    margin-top: 70px;
+}
+
+/*GRIDS*/
+
+/*Left*/
+.fb-left-grid{
+    float: left;
+    width: 60%;
+    min-height: 100%;
+}
+
+/*Right*/
+.fb-right-grid{
+    float: right;
+    width: 40%;
+    min-height: 100%;
+}
+
+/*GRIDS END*/
+
+/* == FIRST BOX == */
+
+/*...................
+
+/* == SECOND BOX == */
+
+.second-box{
+    float:left;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-left: 0;
+}
+
+/*GRIDS*/
+
+/*Left*/
+.sb-left-grid{
+    float: left;
+    width: 40%;
+    min-height: 100%;
+}
+
+.sb-grid-text{
+float: right;
+}
+
+/*Right*/
+.sb-right-grid{
+    float: right;
+    width: 60%;
+    min-height: 100%;
+}
+
+/*GRIDS END*/
+
+/* == SECOND BOX == */
+
+/*...................
+
+/* == THIRD BOX == */
+
+.third-box{
+    float: right;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-right: 0;
+}
+
+/*GRIDS*/
+
+/*Left*/
+.tb-left-grid{
+    float: left;
+    width: 60%;
+    min-height: 100%;
+}
+
+.tb-grid-text{
+float: right;
+}
+
+/*Right*/
+.tb-right-grid{
+    float: right;
+    width: 40%;
+    min-height: 100%;
+}
+
+/*GRIDS END*/
+
+/* == THIRD BOX == */
+
+
+
+
+
+
+/*-----------------------CONTENT BOXES---------------------*/
+
+
