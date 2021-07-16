@@ -25,9 +25,35 @@
 						Insert your email
 
 					</span>
+
+					<div class="txt-error p-b-10">
+						<?php	
+
+							if(isset($_GET['error_type'])) { 
+
+								$error_type = $_GET['error_type'];
+
+								switch($error_type) {
+
+									case 'empty_email': 
+										echo "Empty Email";
+									break;
+
+									case 'invalid_email':
+										echo "Invalid Email";
+									break;
+
+									case 'wrong_email': 
+										echo "Wrong Email";
+									break;
+								}
+							}
+
+						?>
+					</div>
 						
 					<div class="wrap-input validate-input  m-b-20" data-validate="Enter email">
-						<input id="change_password_email" class=" input" type="text" name="email" placeholder="email" required>
+						<input id="change_password_email" class=" input" type="text" name="email" placeholder="email">
 						<span class="focus-input"></span>
 					</div>
 						
@@ -38,6 +64,44 @@
 					</div>
 				</form>
 			</div>
-		</div>	
+		</div>
+
+		<?php 
+
+			if(isset($_GET['error_type'])) { 
+
+				switch($error_type) {
+
+					case 'empty_email': 
+							?>
+								<script>
+									document.getElementById("change_password_email").style.border = "1px solid #f00";
+									document.getElementById("change_password_email").style.borderRadius = "20px";
+								</script>
+							<?php
+						break;
+
+					case 'invalid_email': 
+						?>
+							<script>
+								document.getElementById("change_password_email").style.border = "1px solid #f00";
+								document.getElementById("change_password_email").style.borderRadius = "20px";
+							</script>
+						<?php
+					break;	
+
+					case 'wrong_email': 
+							?>
+								<script>
+									document.getElementById("change_password_email").style.border = "1px solid #f00";
+									document.getElementById("change_password_email").style.borderRadius = "20px";
+								</script>
+							<?php
+						break;
+				}
+			}
+
+		?>
+
 	</body>
 </html>

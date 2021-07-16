@@ -648,3 +648,336 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 .trigger{
 	text-decoration: none;
 }
+
+/*____________MEDIA___________*/
+
+@media only screen and (max-width: 1650px) {
+	
+	.container-header
+	{
+		width: 100%;
+	}
+
+	.account-name
+	{
+		padding-left: 30px;
+		float: left;
+	}
+
+	.account-settings
+	{
+		margin-right: 70px !important;
+	}
+
+}
+
+@media only screen and (max-width: 1500px) {
+	
+	.chkBox-sort
+	{
+		margin-left: 50px !important;
+	}
+
+	.upload-container
+	{
+		margin-left: 30px !important;
+	}
+
+	.delete
+	{
+		margin-left: 150px !important;
+	}
+
+	.header-features
+	{
+		width: 60%;
+		float: left; 
+	}
+
+	.header-account-info
+	{
+		float: left;
+	}
+
+	.header-account-info
+	{
+		width: 40%;
+	}
+
+}
+
+@media only screen and (max-width: 1300px) {
+
+	.chkBox-sort
+	{
+		margin-left: 0px !important;
+	}
+
+	.upload-container
+	{
+		margin-left: 0px !important;
+	}
+
+	.delete
+	{
+		margin-left: 100px !important;
+	}
+
+	.header-features
+	{
+		width: 60%;
+		float: left; 
+	}
+
+	.header-account-info
+	{
+		float: left;
+	}
+	
+	.account-settings
+	{
+		float: right !important;
+		margin-right: 0px !important;
+		padding-right: 0px !important;
+	}
+
+	.account-name
+	{
+		margin-right: 5px !important;
+		padding-right: 0px !important;
+		float: left;
+	}
+
+	.header-account-info
+	{
+		width: 30%;
+		float: right;
+	}
+
+}
+
+@media only screen and (max-width: 1100px) {
+
+	.header-features
+	{
+		float: left;
+		width: 70%;
+	}
+
+	.header-account-info
+	{
+		float: right;
+		width: 29%;
+	}
+
+	.account-name
+	{
+		padding-left: 0px;
+		float: left;
+	}
+
+}
+
+@media only screen and (max-width: 976px) {
+
+	.header-features
+	{
+		width: 100%;
+	}
+
+	.header-account
+	{
+		display: block;
+		text-align: center;
+	}
+
+	.header-account-info
+	{
+		height: fit-content;
+		width: 100%;
+		left: 0%;
+		position: relative;
+		display: block;
+	}
+
+	.container-header
+	{
+		height: calc(9.857vh + 100px);
+	}
+
+	.dynamic-container
+	{
+		margin-top: calc(1.851851851vh + 100px);
+	}
+
+	.content-container
+	{
+		background: linear-gradient(#ffe6ff, #ffe6ff) no-repeat 0px calc(13.44086021vh + 100px)
+	}
+
+}
+
+@media only screen and (max-width: 800px) {
+
+	.header-features
+	{
+		bottom: 0%;
+		position: relative;
+		width: 350px;
+		height: fit-content;
+	}
+	
+	.chkBox-sort
+	{
+		margin-bottom: 3px;
+	}
+
+	.upload-container
+	{
+		margin-bottom: 3px;
+	}
+
+	.header-account-info
+	{
+		width: fit-content;
+		bottom: 0%;
+		position: relative;
+	}
+
+	.upload-container
+	{
+		display: block;
+		width: fit-content;
+		margin-right: 0px !important;
+	}
+
+	.delete
+	{
+		margin-left: 0px !important;
+	}
+
+	.container-header
+	{
+		height: calc(9.857vh + 200px);
+		margin-top: 5px;
+	}
+
+	.dynamic-container
+	{
+		margin-top: calc(1.851851851vh + 200px);
+	}
+
+	.content-container
+	{
+		background: linear-gradient(#ffe6ff, #ffe6ff) no-repeat 0px calc(13.44086021vh + 200px)
+	}
+
+}
+
+@media only screen and (max-width: 700px) {
+	
+	html
+	{
+		height: 100%;
+	}
+	
+	.page-container
+	{ 
+		margin:0;
+		padding:0;
+		overflow:hidden;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		height: auto;
+	}
+
+	.menu-container
+	{
+		width: 100vw;
+		min-width: 100%;
+		display: block;
+		height: 500px !important;
+		max-height: 500px !important;
+		min-height: 500px !important;
+		text-align: center;
+
+	}
+
+	.content-container
+	{
+		display: block;
+		position: absolute;
+		margin-top: 510px;
+		width: 100%;
+		height: fit-content;
+		overflow-y: scroll;
+		background: linear-gradient(#ffe6ff, #ffe6ff) no-repeat 0px calc(13.44086021vh + 85px)
+	}
+
+	.container-header
+	{
+		max-width: 630px;
+		min-width: 350px;
+		height: calc(9.857vh + 100px);
+	}
+
+	.header-features
+	{
+		float: left;
+		width: 70%;
+	}
+
+	.header-account-info
+	{
+		height: 100%;
+	}
+
+	.account-name
+	{
+		padding-left: 0px;
+		float: left;
+		
+	}
+
+	.dynamic-container
+	{
+		margin-top: 10px;
+	}
+
+	.menu-bar
+	{
+		margin: auto;
+		width: 18%;
+		text-align: center;
+	}
+
+	.menu-bar-a a
+	{
+		font-size: 20px;
+	}
+
+	.menu-bar-a hr 
+	{
+		width: 100% !important;
+	}
+
+	.menu-text
+	{
+		font-size: 40px;
+	}
+
+}
+
+
+@media only screen and (max-width: 621px) {
+	.menu-name
+	{
+		margin-right: 0px !important;
+		
+	}
+
+	.header-account-info
+	{
+		height: fit-content;
+	}
+}

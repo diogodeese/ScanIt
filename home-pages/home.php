@@ -108,9 +108,9 @@
 						</div><!-- UPLOAD CONTAINER -->
 
 						<div class="m-l-228 delete"><!-- DELETE -->
-								
-							<button class="btn_delete" type="button" id="btn_delete">
-								
+
+							<button class="btn_delete" type="button" id="btn_delete" onclick="typeSubmit()">
+									
 								<i class="fas fa-trash fa-lg m-r-5"></i>
 								Delete Selected Files
 
@@ -136,7 +136,7 @@
 
 						<div class="account-settings gear m-r-120"><!-- ACCOUNT SETTINGS --> 
 
-							<span class="gear" onclick="settings()">
+							<span class="gear" onClick="settings()">
 								<i class="fas fa-cog fa-2x gear"></i>
 								<i class="fas fa-chevron-down gear m-t-7 p-l-5"></i>
 							</span>
@@ -188,6 +188,8 @@
                             $result = $db->query($sql);
 
                             if ($result->num_rows > 0) {
+
+								echo "<form method='post' action='include/options'>";
                                 echo "<table class='table-content'>
                                     <tr>
                                         <th> Select </th>
@@ -201,7 +203,7 @@
 
                                 $arrayCounter = 0;
                                 while($row = $result->fetch_assoc()) {
-                                
+
                                     $urlValue[$arrayCounter] = 'file.php?page='.$row['unic_link'];
 
                                     echo "<tr class='table-content-rows'>
@@ -209,16 +211,14 @@
                                             <td id='select'>
                                                 <label class='chkBox_container-table'>
 
-                                                    <input id='' type='checkbox'>
-                                                    
-                                                    <!-- PHP para meter o valor do id chk box com o do id do ficheiro ==================================== -->
+													<input type='checkbox' name='checkbox[]' value='".$row['id']."'>
                                                     
                                                     <span class='checkmark-table'></span>
 
                                                 </label>
                                             </td>
                                             
-                                            <td class='image'> <a href=file.php?page=".$row['unic_link']."&id=".$arrayCounter." onclick='generateQR($arrayCounter)'><img src=".$filePath.$row['name']."></a></td>
+                                            <td class='image'> <a href=file?page=".$row['unic_link']."&id=".$arrayCounter." onclick='generateQR($arrayCounter)'><img src=".$filePath.$row['name']."></a></td>
                                             
                                             <td id='name'> ".$row['name']." </td>
                                             
@@ -234,13 +234,15 @@
                                         
                                         </tr>
                                     ";
-
+									
                                     $arrayCounter++;
                                 }
                             } else {
                                 echo "Sem items";
                             }
 
+							echo "<input type='hidden' name='delete' id='delete' value=''>
+							</form>";
                         ?>
 
 					</div><!-- TABLE CONTAINER -->
@@ -251,9 +253,7 @@
 
 		</div><!-- PAGE - CONTEINER -->
 
-    </body>
-
-    	<!-- JAVA SCRIPT -->
+		<!-- JAVA SCRIPT -->
 		<script>
 			function FileUpload()
 			{
@@ -280,8 +280,19 @@
 
 				}
 			}
+
+			function settings() {
+				var box = document.getElementById('settings-box');
+                if (box.style.display === "none") box.style.display = "block";
+                else box.style.display = "none";
+            }
+
+			function typeSubmit() {
+
+				document.getElementById('delete').type = 'submit';
+				document.getElementById('delete').click();	
+			}
         </script>
-
-        <?php ob_end_flush(); ?>
-
+    </body>
+    <?php ob_end_flush(); ?>
 </html>

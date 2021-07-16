@@ -46,9 +46,9 @@
 
 								chdir("../home-pages/uploads/");
 								$curdir = getcwd();
-									
 								mkdir($curdir."/".$_SESSION['user'], 0777);
-								header('Location: ../index');
+
+								header('Location: mailsender/email-sender?type=account_confirmation&email='.$email.'&nome='.$user);
 
 							} else {
 								header('Location: ../sign-up?error_type=different_passwords');
@@ -69,10 +69,8 @@
 			} else {
 				header('Location: ../sign-up?error_type=empty_user');
 			}
-
-
-
 		}
+
 
 	#Login
 	if (isset($_POST['login'])) {
@@ -88,11 +86,16 @@
 					$password = md5($pass); 
 					$sql_pass = "SELECT * FROM users WHERE username LIKE '$username' AND password LIKE '$password'";
 					$results_pass = mysqli_query($db, $sql_pass);
-					if (mysqli_num_rows($results_pass) > 0 ) {
+					if (mysqli_num_rows($results_pass) > 0) {
 
 						$row = mysqli_fetch_row($results_pass);
-						$_SESSION['username']  = $username;
-						header('Location: ../home-pages/home');
+
+						if($row[7] == 1) {
+							$_SESSION['username']  = $username;
+							header('Location: ../home-pages/home');
+						} else {
+							header('Location: mailsender/email-sender?type=account_confirmation&email='.$row[2].'&nome='.$row['username']);
+						}
 
 					} else {
 						header('Location: ../index?error_type=wrong_pass');
@@ -111,45 +114,37 @@
 		}
 	}
 
-	#Mail
-	if (isset($_POST['mail']))
-	{
-		unset($_POST['mail']);
-		$_SESSION['mail_error'] = 0;
 
-		#Receive the input
-		$mail = mysqli_real_escape_string($db, $_POST['email']);
+	#code-input / insert_code_email_confirmation
+	if(isset($_POST['insert_code_email_confirmation'])) {
+		$code = $_POST['code'];
+		$email = $_POST['email'];
 
-		#Verifys if it's empty
-		if (empty($mail)) { $_SESSION['mail_error'] += 1; }
+		if(!empty($code)) {
+			$code_check = "SELECT activation_code, username FROM users WHERE email LIKE '$email' AND activation_code LIKE '$code' LIMIT 1";
+			$result_user = $db->query($code_check);
 
-		#If there is no erros the changes in the db will be made
-		if ($_SESSION['mail_error'] == 0)
-			{
-				$query = "SELECT * FROM users WHERE email like '$mail' ";
-				$results = mysqli_query($db, $query);
+			if($result_user->num_rows > 0) {
 
-				#If there are an account 
-				if (mysqli_num_rows($results) > 0 )
-					{
-						unset($_SESSION['mail_error']);
-					}
-				else
-					{
-						#Goes back to the mail.php
-						$_SESSION['mail_error'] += 1;
-						header('location: ../mail.php');
-					}	
+				$row = mysqli_fetch_row($result_user);
+				$_SESSION['username'] = $row[1];
+
+				$sql = "UPDATE users SET active = 1 WHERE email LIKE '$email' LIMIT 1";
+				$results = mysqli_query($db, $sql);
+
+				header('Location: ../home-pages/home');
+			} else {
+				header('location: ../utility-pages/code-input.php?email='.$email.'&button=email_confirmation&error_type=wrong_code');
 			}
-		else
-			{
-				#Goes back to the mail.php
-				$_SESSION['mail_error'] += 1;
-				header('location: ../mail.php');
-			}
+
+		} else {
+			$_SESSION['mail_error'] += 1;
+			header('location: ../utility-pages/code-input.php?email='.$email.'&button=email_confirmation&error_type=empty_code');
+		}
 	}
 
-	#asking_4_mail.php
+
+	#cp-email-input
 	if(isset($_POST['insert_email_forgot_password'])) {
 		$email = $_POST['email'];
 
@@ -165,44 +160,37 @@
 					$results = mysqli_query($db, $sql);
 					header('Location: mailsender/email-sender.php?email='.$email.'&&nome='.$row[0].'&&type=forgot_pass');
 				} else {
-					#Goes back to the asking_4_mail.php
-					$_SESSION['mail_error'] += 1;
-					header('location: ../utility-pages/change-password/cp-email-input');
+					header('location: ../utility-pages/change-password/cp-email-input?error_type=wrong_email');
 				}
 
 			} else {
-				#Goes back to the asking_4_mail.php
-				$_SESSION['mail_error'] += 1;
-				header('location: ../utility-pages/change-password/cp-email-input');
+				header('location: ../utility-pages/change-password/cp-email-input?error_type=invalid_email');
 			}
 
 		} else {
-			#Goes back to the asking_4_mail.php
-			$_SESSION['mail_error'] += 1;
-			header('location: ../utility-pages/change-password/cp-email-input');
+			header('location: ../utility-pages/change-password/cp-email-input?error_type=empty_email');
 		}
 	}
 
 
-	#asking_4_code.php
+	#code-input / insert_code_forgot_password
 	if(isset($_POST['insert_code_forgot_password'])) {
 		$code = $_POST['code'];
 		$email = $_POST['email'];
 
 		if(!empty($code)) {
-			$code_check = "SELECT password_code FROM users WHERE email LIKE '$email' LIMIT 1";
+			$code_check = "SELECT password_code FROM users WHERE email LIKE '$email' AND password_code LIKE '$code' LIMIT 1";
 			$results = mysqli_query($db, $code_check);
 
 			if(mysqli_num_rows($results) > 0 ) {
 				header('Location: ../utility-pages/change-password/change-password?email='.$email.'&type=forgot_pass');
 			} else {
 				$_SESSION['mail_error'] += 1;
-				header('location: ../utility-pages/code-input.php?email='.$email.'&button=forgot_pass');
+				header('location: ../utility-pages/code-input.php?email='.$email.'&button=forgot_pass&error_type=wrong_code');
 			}
 
 		} else {
-			$_SESSION['mail_error'] += 1;
-			header('location: ../utility-pages/code-input.php?email='.$email.'&button=forgot_pass');
+			header('location: ../utility-pages/code-input.php?email='.$email.'&button=forgot_pass&error_type=empty_code');
 		}
 	}
 
