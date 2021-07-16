@@ -4,22 +4,22 @@
 
 @font-face {
 	font-family: SourceSansPro-Regular;
-	src: url('/mail_html/fonts/source-sans-pro/SourceSansPro-Regular.ttf'); 
+	src: url('../fonts/source-sans-pro/SourceSansPro-Regular.ttf'); 
 }
 
 @font-face {
 	font-family: SourceSansPro-Bold;
-	src: url('/mail_html/fonts/source-sans-pro/SourceSansPro-Bold.ttf'); 
+	src: url('../fonts/source-sans-pro/SourceSansPro-Bold.ttf'); 
 }
 
 @font-face {
 	font-family: SourceSansPro-SemiBold;
-	src: url('/mail_html/fonts/source-sans-pro/SourceSansPro-SemiBold.ttf'); 
+	src: url('../fonts/source-sans-pro/SourceSansPro-SemiBold.ttf'); 
 }
 
 @font-face {
 	font-family: JosefinSans-Bold;
-	src: url('/mail_html/fonts/JosefinSans/JosefinSans-Bold.ttf'); 
+	src: url('../fonts/JosefinSans/JosefinSans-Bold.ttf'); 
 }
 
 /*--------------------FONTS-----------------------*/
@@ -125,7 +125,7 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 
 .txt-error{
 	color: #f00;
-	text-size: 16px;
+	font-size: 16px;
 	font-family: SourceSansPro-Regular;
 }
 /*------------------MAIN CSS----------------------*/
