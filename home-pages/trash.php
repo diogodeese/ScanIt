@@ -180,7 +180,7 @@
 
                                             </td>
                                             
-                                            <td> <img src=".$filePath.$row['name']." style='height: 250px; width: 250px; object-fit: cover; object-position: center center;'> </td>
+                                            <td  class='image'> <img src=".$filePath.$row['name']." style='height: 250px; width: 250px; object-fit: cover; object-position: center center;'> </td>
                                             
                                             <td id='name'> ".$row['name']." </td>
                                             
