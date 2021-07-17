@@ -144,7 +144,7 @@
 						$host= gethostname();
 						$ip = gethostbyname($host);
 
-						$qrCodeUrl = "http://".$ip."/pap-30-05/home-pages/download.php?path=".$filePath.$_SESSION['fileName'];
+						$qrCodeUrl = "http://".$ip."/ScanIt/home-pages/download.php?path=".$filePath.$_SESSION['fileName'];
 
 					?>
 
@@ -158,6 +158,19 @@
 
 		</div><!-- PAGE - CONTEINER -->
 		
+		<div id="qrcode"></div>
+
+		<script src="../js/qrcode.min.js"></script>
+		<script>
+			window.onload = function generateQR() {
+				urlValue = window.location.assign = "<?php echo $qrCodeUrl; ?>";
+				var qrCode = new QRCode(document.getElementById('qrcode'));
+				qrCode.makeCode(urlValue);
+			}
+		</script>
+
+
+
 	</body>
 
 </html>

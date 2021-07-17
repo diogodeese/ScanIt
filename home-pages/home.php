@@ -35,11 +35,11 @@
 
 				<div class="menu-text p-r-30 p-l-30 p-t-50"><!-- MENU TEXT-->
 
-					<img src="/mail_html/images/code.jpg" width="35px" height="35px">SCANIT		
+				SCANIT<div id="qrcode" style="margin-left: 25%; width: 100px; height: 100px;"></div>	
 
 				</div><!-- MENU TEXT-->
 
-				<div class="menu-bar p-t-60" ><!-- MENU BAR -->
+				<div class="menu-bar p-t-125" ><!-- MENU BAR -->
 
 					<div class="menu-bar-a p-r-20"><!-- MENU BAR A --><!-- TRAOCAR HTML POR PHP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
@@ -67,12 +67,12 @@
 								
 						<div class="chkBox-sort m-l-105"><!-- CHECK BOX AND SORT BY -->
 						
-							<label class="chkBox_container">
+						<label class="chkBox_container">
 
-								<input id="select-all" type="checkbox">
-								<span class="checkmark"></span>
+							<input id="select-all" type="checkbox" onclick="selectAll()">
+							<span class="checkmark"></span>
 
-							</label>
+						</label>
 								
 							<select class="ddr_search" name="ddr_checkBox" id="ddr_checkBox"">
 
@@ -152,7 +152,7 @@
 							</div>
 
 							<div class="change-box trigger">
-								<a href="#" class="trigger">
+								<a href="../utility-pages/change-password/change-password?user=<?php echo $_SESSION['username']; ?>" class="trigger">
 									Change Password
 								</a>
 							</div>
@@ -253,8 +253,24 @@
 
 		</div><!-- PAGE - CONTEINER -->
 
+		<?php
+			
+			$host= gethostname();
+			$ip = gethostbyname($host);
+
+			$qrCodeUrl = "http://".$ip."/ScanIt/index";					
+
+		?>
+
 		<!-- JAVA SCRIPT -->
+		<script src="../js/qrcode.min.js"></script>
 		<script>
+			window.onload = function generateQR() {
+				urlValue = window.location.assign = "<?php echo $qrCodeUrl; ?>";
+				var qrCode = new QRCode(document.getElementById('qrcode'), { width: 100, height: 100 });
+				qrCode.makeCode(urlValue);
+			}
+
 			function FileUpload()
 			{
 				document.getElementById('InputFile').click();	

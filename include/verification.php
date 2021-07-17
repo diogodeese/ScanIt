@@ -213,13 +213,13 @@
 					header('Location: ../index');
 
 				} else {
-					echo "diferentes";
+					header('Location: ../utility-pages/change-password/change-password?error_type=different_passwords');
 				}
 			} else {
-				echo "pass2 vazia";
+				header('Location: ../utility-pages/change-password/change-password?error_type=empty_pass2');
 			}
 		} else {
-			echo "pass1 vazia";
+			header('Location: ../utility-pages/change-password/change-password?error_type=empty_pass1');
 		}
 	}
 
