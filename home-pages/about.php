@@ -13,15 +13,9 @@
 		<link rel="stylesheet" href="../include/fontawesome/css/all.css">
 <!-- ==================================================== -->
 
-	</head>
+</head>
 
-	<?php
-
-    session_start();
-    if(empty($_SESSION['username'])) { header('../index'); }
-    require('../include/database-connection.php');
-
-	?>
+	<?php session_start(); ?>
 
 	<body>
 	 
@@ -39,15 +33,13 @@
 
 					<div class="menu-bar-a p-r-20"><!-- MENU BAR A --><!-- TRAOCAR HTML POR PHP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
-						<a class="m-b-10" href="HOME.php">Home</a>
+						<a class="m-b-10" href="home">Home</a>
 						<hr style="width:70%;float:right">
-						<a class="m-b-10 m-t-10" href="Trash.php">Trash</a>
+						<a class="m-b-10 m-t-10" href="trash">Trash</a>
 						<hr style="width:70%;float:right">
-						<a class="m-b-10 m-t-10 active" href="ScanIt.php">ScanIt</a>
+						<a class="m-t-10 m-t-10 active" href="about">About</a>
 						<hr style="width:70%;float:right">
-						<a class="m-t-10 m-t-10" href="About.php">About</a>
-						<hr style="width:70%;float:right">
-						<a class="m-t-5 red-txt" href="#exit">Log Out</a>
+						<a class="m-t-5 red-txt" href="../include/logout">Log Out</a>
 
 					</div><!-- MENU BAR A -->
 
@@ -62,7 +54,7 @@
 					<div class="header-features"><!-- HEADER FEATURES -->   
 
                         <span class="header-text">
-                            ScanIt
+                            About
                         </span>
 
 					</div><!-- HEADER FEATURES -->
@@ -74,9 +66,7 @@
 							<i class="fas fa-user fa-lg m-r-10"></i>
 
 							<span>
-								<?php
-								echo $_SESSION['username'];
-								?>
+								<?php echo $_SESSION['username']; ?>
 							</span>
 
 						</div><!-- ACCOUNT NAME -->
@@ -96,61 +86,41 @@
 
 				<div class="dynamic-container"><!-- DYNAMIC CONTAINER -->
 
-                    <?php
+                    <div class="about-text-container m-t-50 m-r-50 m-l-50">
 
-						require('include/file-creation.php');
+                        <p class="about-title">
+                            What's ScanIt?
+                        </p>
+                        <br>
+                        <p class="about-text">
+                            It's a web site that stores your files online, it works like a cloud, you upload the files to the 
+                            server and with the access of the account that the files where stored you can easily download them 
+                            on your phone or computer, there's an easier way to transfer files to the phone, just use the QR 
+                            code of the file you want to donwload to your selfphone and there it is. :)    
+                        </p>
 
-						$sql = "SELECT id, name, date_upload, unic_link FROM files WHERE id_users = $user[id] AND active = 1 AND unic_link = '$_GET[page]'";
-						$result = $db->query($sql);
 
-						if ($result->num_rows > 0) {
-							echo "<table border='1px'>
-								<tr>
-									<th> Imagem </th>
-									<th> File Name </th>
-									<th> Data </th>
-									<th> Size </th>
-								</tr>
-							"; 
+                        <p class="about-title m-t-35">
+                            Who are we?
+                        </p>
+                        <br>
+                        <p class="about-text">
+                            Not the FBI I swear. We are students of Programming (Gestão e Programação de Sistemas Informáticos) 
+                            of the Escola Secundária da Amadora. There's three of us: Alexandre Gomes, Diogo Santos and Vítor Batista,
+                            all of us have ages between 17 and 18 and we are very good looking.  
+                        </p>
 
-							$arrayCounter = 0;
-							while($row = $result->fetch_assoc()) {	
-								
-								$unic_link = $row['unic_link'];
-								$_SESSION['fileName'] = $row['name'];
+                        <p class="about-title m-t-35">
+                            What's this project for?
+                        </p>
+                        <br>
+                        <p class="about-text">
+                            Well this is our final project (PAP), we hope you find it cool and usefull. 
+                        </p>
 
-								echo "<tr>
-										
-										<td class = 'image'><img src=".$filePath.$row['name']." width='500' height='400'></td>
-										
-										<td id = 'name'> ".$row['name']." </td>
+                           
 
-										<td id = 'date'> ".$row["date_upload"]." </td>
-
-										<td id = 'size'>  </td>
-                                            
-									</tr>
-								";
-
-								$arrayCounter++;
-								
-								echo "<a href='$filePath$row[name]' download>Download</a>";
-
-							}
-						} else {
-							echo "Sem items";
-						}
-					
-						$host= gethostname();
-						$ip = gethostbyname($host);
-
-						$qrCodeUrl = "http://".$ip."/ScanIt/home-pages/download.php?path=".$filePath.$_SESSION['fileName'];
-
-					?>
-
-					<a href="home">
-						Go Back
-					</a>
+                    </div>
 
 				</div><!-- DYNAMIC CONTAINER -->
 				
@@ -158,19 +128,25 @@
 
 		</div><!-- PAGE - CONTEINER -->
 		
-		<div id="qrcode"></div>
 
+		<?php
+			
+			$host= gethostname();
+			$ip = gethostbyname($host);
+
+			$qrCodeUrl = "http://".$ip."/ScanIt/index";					
+
+		?>
+
+		<!-- JAVA SCRIPT -->
 		<script src="../js/qrcode.min.js"></script>
 		<script>
 			window.onload = function generateQR() {
 				urlValue = window.location.assign = "<?php echo $qrCodeUrl; ?>";
-				var qrCode = new QRCode(document.getElementById('qrcode'));
+				var qrCode = new QRCode(document.getElementById('qrcode'), { width: 100, height: 100 });
 				qrCode.makeCode(urlValue);
 			}
 		</script>
-
-
-
+		
 	</body>
-
 </html>

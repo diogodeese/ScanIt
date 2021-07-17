@@ -19,55 +19,54 @@
         header('Location: ../home');
     }
 
+	if(isset($_GET['options'])) {
+
+        $option = $_GET['options'];
+
+        switch($option) {
+
+            case 'recover':
+
+                $id = $_GET['id'];
+                $sql = "UPDATE files SET active = 1 WHERE id='$id'";
+
+                if ($db->query($sql) === TRUE) { header('location: ../trash'); } 
+                else { echo "Erro ao apagar o registo: " . $db->error; }
+
+            break;
+
+            case 'remove':
+
+                $array = $_SESSION['checked'];
+
+                print_r($_SESSION['checked']);
+
+                for($i = 0; $i < 5; $i++) {
+                    $sql = "UPDATE files SET active = 0, date_delete = NOW() WHERE id='$array[$i]'";
+                    $results = mysqli_query($db, $sql);
+
+                    echo $array[$i]."<br>";
+                }
 
 
-	/*
-    $option = $_GET['options'];
 
-    switch($option) {
+            break;
 
-        case 'recover':
+            case 'delete':
 
-            $id = $_GET['id'];
-            $sql = "UPDATE files SET active = 1 WHERE id='$id'";
+                $filePath = 'uploads/'.$_SESSION['username'].'/';
+                $id = $_GET['id'];
+                $name = $_GET['name'];
+                $filePath = $filePath.$name;
 
-            if ($db->query($sql) === TRUE) { header('location: ../trash'); } 
-            else { echo "Erro ao apagar o registo: " . $db->error; }
+                unlink("../".$filePath);
 
-        break;
+                $sql = "DELETE FROM files WHERE id='$id'";
 
-        case 'remove':
+                if ($db->query($sql) === TRUE) { header('location: ../trash'); } 
+                else { echo "Erro ao apagar o registo: " . $db->error; }
 
-            $array = $_SESSION['checked'];
-
-            print_r($_SESSION['checked']);
-
-            for($i = 0; $i < 5; $i++) {
-                $sql = "UPDATE files SET active = 0, date_delete = NOW() WHERE id='$array[$i]'";
-                $results = mysqli_query($db, $sql);
-
-                echo $array[$i]."<br>";
-            }
-
-
-
-        break;
-
-        case 'delete':
-
-            $filePath = 'uploads/'.$_SESSION['username'].'/';
-            $id = $_GET['id'];
-            $name = $_GET['name'];
-            $filePath = $filePath.$name;
-
-            unlink("../".$filePath);
-
-            $sql = "DELETE FROM files WHERE id='$id'";
-
-            if ($db->query($sql) === TRUE) { header('location: ../trash'); } 
-            else { echo "Erro ao apagar o registo: " . $db->error; }
-
-        break;
-    }
-*/
+            break;
+        }
+    } 
 ?>

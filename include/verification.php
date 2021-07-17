@@ -223,4 +223,27 @@
 		}
 	}
 
+	#change-username
+	if(isset($_POST['change_username'])) {
+
+		$username = $_POST['username'];
+		$id = $_POST['id'];
+
+		if(!empty($username)) {
+
+			$sql = "UPDATE users SET username = '$username' WHERE id LIKE '$id'";
+			$results = mysqli_query($db, $sql);
+
+			chdir("../home-pages/uploads/");
+			$curdir = getcwd();
+			rename($_SESSION['username'], $username);
+
+			$_SESSION['username'] = $username;
+			header('Location: ../home-pages/home');
+
+		} else {
+			header('Location: ../utility-pages/change-name/change-name?error_type=empty_user');
+		}
+	}
+
 ?>

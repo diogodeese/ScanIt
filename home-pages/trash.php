@@ -41,8 +41,6 @@
 						<hr style="width:70%;float:right">
 						<a class="m-b-10 m-t-10 active" href="TRASH.php">Trash</a>
 						<hr style="width:70%;float:right">
-						<a class="m-b-10 m-t-10" href="ScanIt.php">ScanIt</a>
-						<hr style="width:70%;float:right">
 						<a class="m-t-10 m-t-10" href="About.php">About</a>
 						<hr style="width:70%;float:right">
 						<a class="m-t-5 red-txt" href="#exit">Log Out</a>
@@ -58,45 +56,6 @@
 				<div class="container-header"><!-- CONTAINER HEADER -->
 
 					<div class="header-features"><!-- HEADER FEATURES --> 
-								
-						<div class="chkBox-sort m-l-105"><!-- CHECK BOX AND SORT BY -->
-						
-							<label class="chkBox_container">
-
-								<input id="select-all" type="checkbox">
-								<span class="checkmark"></span>
-
-							</label>
-								
-							<select class="ddr_search" name="ddr_checkBox" id="cars">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-								<optgroup class="ddr_search-text" label="Sort by">
-
-									<option value="">Date</option>
-									<option value="">Weight</option>
-									<option value="">Type</option>
-
-								</optgroup>
-
-							</select>
-
-						</div><!-- CHECK BOX AND SORT BY -->
 
                         <span class="header-text" style="left: 40% !important">
                             Trash
@@ -127,6 +86,22 @@
 
 						</div><!-- ACCOUNT SETTINGS -->
 
+                        <div class="settings-box trigger" id="settings-box" style="display: none;"><!-- SETTINGS BOX -->
+
+							<div class="change-box trigger">
+								<a href="#" class="trigger">
+									Change Name
+								</a>
+							</div>
+
+							<div class="change-box trigger">
+								<a href="../utility-pages/change-password/change-password?user=<?php echo $_SESSION['username']; ?>" class="trigger">
+									Change Password
+								</a>
+							</div>
+
+						</div><!-- SETTINGS BOX -->
+
 					</div><!-- HEADER ACCOUNT INFO -->
 							
 				</div><!-- CONTAINER HEADER -->
@@ -156,7 +131,6 @@
 
                                 echo "<table border='table-content'>
                                     <tr>
-                                        <th> Select </th>
                                         <th> Imagem </th>
                                         <th> File Name </th>
                                         <th> Data </th>
@@ -168,19 +142,7 @@
                                 while($row = $result->fetch_assoc()) {
                                     echo "<tr>
                                             
-                                            <td id='select'>
-
-                                                <label class='chkBox_container-table'>
-
-                                                    <input id='' type='checkbox' name='checkbox[]' value='".$row['id']."'>
-
-                                                    <span class='checkmark-table'></span>
-                
-                                                </label>
-
-                                            </td>
-                                            
-                                            <td  class='image'> <img src=".$filePath.$row['name']." style='height: 250px; width: 250px; object-fit: cover; object-position: center center;'> </td>
+                                            <td  class='image'> <img src=".$filePath.$row['name']." > </td>
                                             
                                             <td id='name'> ".$row['name']." </td>
                                             
@@ -188,9 +150,9 @@
                                             
                                             <td id='size'> ".formatBytes(filesize($filePath.$row['name']))." </td>
                                             
-                                            <td> <a href=include/options.php?options=recover&id=".$row['id']."><button> Recover </button></a> </td>
+                                            <td> <a href=include/options.php?options=recover&id=".$row['id']."><button class='btn_table'> Recover </button></a> </td>
                                             
-                                            <td> <a href=include/options.php?options=delete&id={$row['id']}&name={$row['name']}><button> Remove </button></a>
+                                            <td> <a href=include/options.php?options=delete&id={$row['id']}&name={$row['name']}><button class='btn_table'> Remove </button></a>
                                         
                                         </tr>
                                         ";

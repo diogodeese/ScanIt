@@ -35,7 +35,7 @@
 
 				<div class="menu-text p-r-30 p-l-30 p-t-50"><!-- MENU TEXT-->
 
-				SCANIT<div id="qrcode" style="margin-left: 25%; width: 100px; height: 100px;"></div>	
+				<img src="../images/logo.png" width="auto" height="54px"><div id="qrcode" style="display: inline;"></div>
 
 				</div><!-- MENU TEXT-->
 
@@ -47,9 +47,7 @@
 						<hr style="width:70%;float:right">
 						<a class="m-b-10 m-t-10" href="trash">Trash</a>
 						<hr style="width:70%;float:right">
-						<a class="m-b-10 m-t-10" href="ScanIt">ScanIt</a>
-						<hr style="width:70%;float:right">
-						<a class="m-t-10 m-t-10" href="About">About</a>
+						<a class="m-t-10 m-t-10" href="about">About</a>
 						<hr style="width:70%;float:right">
 						<a class="m-t-5 red-txt" href="../include/logout">Log Out</a>
 
@@ -73,18 +71,6 @@
 							<span class="checkmark"></span>
 
 						</label>
-								
-							<select class="ddr_search" name="ddr_checkBox" id="ddr_checkBox"">
-
-								<optgroup class="ddr_search-text" label="Sort by">
-
-									<option value="">Date</option>
-									<option value="">Weight</option>
-									<option value="">Type</option>
-
-								</optgroup>
-
-							</select>
 
 						</div><!-- CHECK BOX AND SORT BY -->
 
@@ -146,7 +132,7 @@
 						<div class="settings-box trigger" id="settings-box" style="display: none;"><!-- SETTINGS BOX -->
 
 							<div class="change-box trigger">
-								<a href="#" class="trigger">
+								<a href="../utility-pages/change-name/change-name?user=<?php echo $_SESSION['username']; ?>" class="trigger">
 									Change Name
 								</a>
 							</div>
@@ -154,12 +140,6 @@
 							<div class="change-box trigger">
 								<a href="../utility-pages/change-password/change-password?user=<?php echo $_SESSION['username']; ?>" class="trigger">
 									Change Password
-								</a>
-							</div>
-
-							<div class="change-box trigger">
-								<a href="#" class="trigger">
-									Change Email
 								</a>
 							</div>
 
@@ -172,6 +152,36 @@
 				<div class="dynamic-container"><!-- DYNAMIC CONTAINER -->
 
 					<div class="table-container m-t-20 m-r-20 m-l-20"><!-- TABLE CONTAINER -->
+
+						<div class="txt-error p-b-10">
+							<?php	
+
+								if(isset($_GET['error_type'])) { 
+
+									$error_type = $_GET['error_type'];
+
+									switch($error_type) {
+
+										case 'extension': 
+												echo "<span class='error_message' style='color: red;'>extension</span>";
+											break;
+
+										case 'empty_pass': 
+												echo "Empty Password";
+											break;
+
+										case 'wrong_user': 
+												echo "This Username does not exist";
+											break;
+
+										case 'wrong_pass': 
+												echo "Wrong Password";
+											break;
+									}
+								}
+
+							?>
+						</div>
 
                         <?php
 
@@ -218,7 +228,7 @@
                                                 </label>
                                             </td>
                                             
-                                            <td class='image'> <a href=file?page=".$row['unic_link']."&id=".$arrayCounter." onclick='generateQR($arrayCounter)'><img src=".$filePath.$row['name']."></a></td>
+                                            <td class='image'> <img src=".$filePath.$row['name']."></td>
                                             
                                             <td id='name'> ".$row['name']." </td>
                                             
@@ -227,7 +237,7 @@
                                             <td id='size'>".formatBytes(filesize($filePath.$row['name']))."</td>
 
                                             <td id='qr'>
-                                                <a href='#'>
+												<a href=file?page=".$row['unic_link']."&id=".$arrayCounter." onclick='generateQR($arrayCounter)'>
                                                     <i class='fa-solid fa-scanner-touchscreen'> QR </i>
                                                 </a>
                                             </td>
@@ -258,7 +268,7 @@
 			$host= gethostname();
 			$ip = gethostbyname($host);
 
-			$qrCodeUrl = "http://".$ip."/ScanIt/index";					
+			$qrCodeUrl = "http://".$ip."/pap/index";					
 
 		?>
 
@@ -267,7 +277,7 @@
 		<script>
 			window.onload = function generateQR() {
 				urlValue = window.location.assign = "<?php echo $qrCodeUrl; ?>";
-				var qrCode = new QRCode(document.getElementById('qrcode'), { width: 100, height: 100 });
+				var qrCode = new QRCode(document.getElementById('qrcode'), { width: 54, height: 54 });
 				qrCode.makeCode(urlValue);
 			}
 

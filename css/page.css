@@ -374,8 +374,7 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 	height: 35px;
 	width: 35px;
 	background-color: #eee;
-	border: 2px solid #70357e;
-	border-right: 1px solid black;
+	border: 3px solid #70357e;
 	margin-top: 0px;
 	vertical-align: top;
 }
@@ -645,13 +644,28 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 
 /*===================PAGE ABOUT=================*/
 
-.trigger{
-	text-decoration: none;
+.btn_table
+{
+	background: -webkit-linear-gradient(top, #9f4bb4, #7f3c90);
+	height: 25px;
+	padding: 0px 6px 0px 6px;
+	border: 0;
+	color: #f5edf7;
+}	
+
+.btn_table:hover 
+{
+	background: -webkit-linear-gradient(bottom, #9f4bb4, #7f3c90);	
+}
+
+.error_message {
+	color: red;
 }
 
 /*____________MEDIA___________*/
 
-@media only screen and (max-width: 1650px) {
+@media only screen and (max-width: 1650px) 
+{
 	
 	.container-header
 	{
@@ -671,7 +685,8 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 
 }
 
-@media only screen and (max-width: 1500px) {
+@media only screen and (max-width: 1500px) 
+{
 	
 	.chkBox-sort
 	{
@@ -706,7 +721,8 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 
 }
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1300px) 
+{
 
 	.chkBox-sort
 	{
@@ -727,11 +743,6 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 	{
 		width: 60%;
 		float: left; 
-	}
-
-	.header-account-info
-	{
-		float: left;
 	}
 	
 	.account-settings
@@ -756,7 +767,8 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1100px) 
+{
 
 	.header-features
 	{
@@ -778,7 +790,8 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 
 }
 
-@media only screen and (max-width: 976px) {
+@media only screen and (max-width: 976px) 
+{
 
 	.header-features
 	{
@@ -808,16 +821,18 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 	.dynamic-container
 	{
 		margin-top: calc(1.851851851vh + 100px);
+		max-width: calc(100vw - 30px);
 	}
 
 	.content-container
 	{
-		background: linear-gradient(#ffe6ff, #ffe6ff) no-repeat 0px calc(13.44086021vh + 100px)
+		background: linear-gradient(#fff, #fff) no-repeat 0px calc(13.44086021vh + 100px)
 	}
 
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 800px) 
+{
 
 	.header-features
 	{
@@ -869,12 +884,13 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 
 	.content-container
 	{
-		background: linear-gradient(#ffe6ff, #ffe6ff) no-repeat 0px calc(13.44086021vh + 200px)
+		background: linear-gradient(#fff, #fff) no-repeat 0px calc(13.44086021vh + 200px)
 	}
 
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 700px) 
+{
 	
 	html
 	{
@@ -896,28 +912,26 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 		width: 100vw;
 		min-width: 100%;
 		display: block;
-		height: 500px !important;
-		max-height: 500px !important;
-		min-height: 500px !important;
+		height: 300px !important;
+		max-height: 300px !important;
+		min-height: 300px !important;
 		text-align: center;
-
 	}
 
 	.content-container
 	{
 		display: block;
 		position: absolute;
-		margin-top: 510px;
-		width: 100%;
+		margin-top: 310px;
+		width: calc(100vw - 30px);
 		height: fit-content;
-		overflow-y: scroll;
-		background: linear-gradient(#ffe6ff, #ffe6ff) no-repeat 0px calc(13.44086021vh + 85px)
+		overflow-y: none;
+		background: linear-gradient(#fff, #fff) no-repeat 0px calc(13.44086021vh + 85px);
 	}
 
 	.container-header
 	{
-		max-width: 630px;
-		min-width: 350px;
+		width: calc(100vw - 30px);
 		height: calc(9.857vh + 100px);
 	}
 
@@ -942,6 +956,8 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 	.dynamic-container
 	{
 		margin-top: 10px;
+		min-width: calc(100vw - 30px);
+		width: calc(100vw - 30px);
 	}
 
 	.menu-bar
@@ -949,6 +965,7 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 		margin: auto;
 		width: 18%;
 		text-align: center;
+		padding: 0px !important;
 	}
 
 	.menu-bar-a a
@@ -964,12 +981,15 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 	.menu-text
 	{
 		font-size: 40px;
+		padding-top: 10px !important;
+		height: fit-content;
 	}
 
 }
 
 
-@media only screen and (max-width: 621px) {
+@media only screen and (max-width: 621px) 
+{
 	.menu-name
 	{
 		margin-right: 0px !important;
@@ -979,5 +999,124 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 	.header-account-info
 	{
 		height: fit-content;
+	}
+}
+
+
+@media only screen and (max-width: 500px) 
+{
+
+	.menu-bar a 
+	{
+		font-size: 15px;
+	}
+
+	.chkBox_container
+	{
+		font-size: 12px;
+	}
+
+	.btn_chose-file
+	{
+		font-size: 12px;
+	}
+
+	.account-name
+	{
+		font-size: 12px;
+	}
+
+	.account-settings span
+	{
+		font-size: 7px;
+	}
+
+	.change-box
+	{
+		font-size: 7px;
+	}
+
+	.header-text
+	{
+		font-size: 15px;
+	}
+
+	.about-title
+	{
+		font-size: 11px;
+	}
+
+	.about-text
+	{
+		font-size: 8px;
+	}
+
+	.menu-bar-a a
+	{
+		font-size: 15px;
+	}
+
+	.menu-text
+	{
+		font-size: 30px;
+	}
+
+	.table-content td
+	{
+		font-size: 15px
+	}
+
+	.table-content th
+	{
+		font-size: 17px
+	}
+
+	.btn_new-folder
+	{
+		font-size: 12px;
+	}
+
+	.btn_delete
+	{
+		font-size: 12px;
+	}
+
+	.btn_send-file
+	{
+		font-size: 12px;
+	}
+
+	.menu-container
+	{
+		width: 100vw;
+		min-width: 100%;
+		display: block;
+		height: 250px !important;
+		max-height: 250px !important;
+		min-height: 250px !important;
+		text-align: center;
+	}
+
+	.content-container
+	{
+		margin-top: 260px;
+	}
+
+	.checkmark
+	{
+		top: auto;
+	}
+
+	.page-container::before
+	{
+		position:fixed;
+		padding:0;
+		margin:0;
+
+		top:0;
+		left:0;
+
+		width: 100%;
+		height: 100%;
 	}
 }
