@@ -62,6 +62,12 @@
 							send
 						</button>
 					</div>
+
+					<div class="text-center p-t-35">
+						<a href="../../index.php" class="txt2 hov1">
+							Go back
+						</a>
+					</div>
 				</form>
 			</div>
 		</div>

@@ -29,7 +29,7 @@
 
 				<div class="menu-text p-r-30 p-l-30 p-t-50"><!-- MENU TEXT-->
 
-					<img src="/mail_html/images/code.jpg" width="35px" height="35px">SCANIT			
+                    <div id="qrcode" style="width: fit-content; margin: auto;" class="p-b-15"></div><img src="../images/logo.png" width="auto" height="54px">		
 
 				</div><!-- MENU TEXT-->
 
@@ -158,7 +158,11 @@
                                         ";
                                 }
                             } else {
-                                echo "sem items";
+                                echo "
+									<div class='txt-error p-b-10' style='text-align: center; margin: 25px; font-size: 18px;'>
+										Your trash is empty.
+									</div>
+								";
                             }
 
                         ?>
@@ -175,7 +179,23 @@
 
     </body>
 
-    <script>
+    <?php
+			
+		$host= gethostname();
+		$ip = gethostbyname($host);
+
+		$qrCodeUrl = "http://".$ip."/ScanIt/index";					
+
+	?>
+
+    <script src="../js/qrcode.min.js"></script>
+	<script>
+		window.onload = function generateQR() {
+			urlValue = window.location.assign = "<?php echo $qrCodeUrl; ?>";
+			var qrCode = new QRCode(document.getElementById('qrcode'), { width: 125, height: 125 });
+			qrCode.makeCode(urlValue);
+		}
+
         function settings() {
 			var box = document.getElementById('settings-box');
             if (box.style.display === "none") box.style.display = "block";

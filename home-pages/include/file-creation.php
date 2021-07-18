@@ -42,8 +42,8 @@
                     if ($db->query($sql) === TRUE) header('Location: home');
                     else echo "Erro: " . $sql . "<br>" . $db->error;
                     
-                } else { header('Location: home'); echo "<script>alert('File exceeds the limted size');</script>"; } 
-            } else { header('Location: home'); echo "<script>alert('There was an error uploading your file');</script>"; }
+                } else { header('Location: home?error_type=size'); } 
+            } else { header('Location: home?error_type=error'); }
         } else { header('Location: home?error_type=extension'); }
 	}
 

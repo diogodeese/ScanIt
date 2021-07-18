@@ -31,7 +31,7 @@
 
 				<div class="menu-text p-r-30 p-l-30 p-t-50"><!-- MENU TEXT-->
 
-					<img src="/mail_html/images/code.jpg" width="35px" height="35px">SCANIT
+					<img src="../images/logo.png" width="auto" height="54px">
 
 				</div><!-- MENU TEXT-->
 
@@ -42,8 +42,6 @@
 						<a class="m-b-10" href="HOME.php">Home</a>
 						<hr style="width:70%;float:right">
 						<a class="m-b-10 m-t-10" href="Trash.php">Trash</a>
-						<hr style="width:70%;float:right">
-						<a class="m-b-10 m-t-10 active" href="ScanIt.php">ScanIt</a>
 						<hr style="width:70%;float:right">
 						<a class="m-t-10 m-t-10" href="About.php">About</a>
 						<hr style="width:70%;float:right">
@@ -81,14 +79,30 @@
 
 						</div><!-- ACCOUNT NAME -->
 
-						<div class="account-settings m-r-120"><!-- ACCOUNT SETTINGS --> 
-							
-							<span>
-								<i class="fas fa-cog fa-2x "></i>
-								<i class="fas fa-chevron-down m-t-7 p-l-5"></i>
+						<div class="account-settings gear m-r-120"><!-- ACCOUNT SETTINGS --> 
+
+							<span class="gear" onClick="settings()">
+								<i class="fas fa-cog fa-2x gear"></i>
+								<i class="fas fa-chevron-down gear m-t-7 p-l-5"></i>
 							</span>
 
 						</div><!-- ACCOUNT SETTINGS -->
+
+						<div class="settings-box" id="settings-box" style="display: none;"><!-- SETTINGS BOX -->
+
+							<div class="change-box trigger">
+								<a href="../utility-pages/change-name/change-name?user=<?php echo $_SESSION['username']; ?>" class="trigger">
+									Change Name
+								</a>
+							</div>
+
+							<div class="change-box trigger">
+								<a href="../utility-pages/change-password/change-password?user=<?php echo $_SESSION['username']; ?>" class="trigger">
+									Change Password
+								</a>
+							</div>
+
+						</div><!-- SETTINGS BOX -->
 
 					</div><!-- HEADER ACCOUNT INFO -->
 							
@@ -100,41 +114,62 @@
 
 						require('include/file-creation.php');
 
+						function formatBytes($size, $precision = 2) {
+							$base = log($size, 1024);
+							$suffixes = array('', 'K', 'M', 'G', 'T');   
+
+							return round(pow(1024, $base - floor($base)), $precision) .' '. $suffixes[floor($base)];
+						}
+
 						$sql = "SELECT id, name, date_upload, unic_link FROM files WHERE id_users = $user[id] AND active = 1 AND unic_link = '$_GET[page]'";
 						$result = $db->query($sql);
 
 						if ($result->num_rows > 0) {
-							echo "<table border='1px'>
+							echo "<table class='table-content' style='width: 90%; margin-left: 5%;'>
 								<tr>
-									<th> Imagem </th>
-									<th> File Name </th>
-									<th> Data </th>
-									<th> Size </th>
-								</tr>
+                                    <th> File Name </th>
+                                    <th> Date </th>
+                                    <th> Size </th>
+                                    <th> Download </th>
+                                    <th> Go Back </th>
+                                </tr>
 							"; 
 
 							$arrayCounter = 0;
 							while($row = $result->fetch_assoc()) {	
+
+                                if($arrayCounter < 1)
+									{
+										echo "
+											<div class='qr-image-container'>
+												
+												<div class='image-qrPage'> <img src=".$filePath.$row['name']."></div>
+
+												<div id='qrcode' class='qr-qrPage'></div>
+
+											</div>
+										";
+									}
 								
 								$unic_link = $row['unic_link'];
 								$_SESSION['fileName'] = $row['name'];
 
-								echo "<tr>
-										
-										<td class = 'image'><img src=".$filePath.$row['name']." width='500' height='400'></td>
-										
-										<td id = 'name'> ".$row['name']." </td>
+								echo "<tr class='table-content-rows'>
+   
+                                    <td id='name'> ".$row['name']." </td>
+                                    
+                                    <td id='date'> ".$row["date_upload"]." </td>
+                                    
+                                    <td id='size'>".formatBytes(filesize($filePath.$row['name']))."</td>
 
-										<td id = 'date'> ".$row["date_upload"]." </td>
+                                    <td> <a href='$filePath$row[name]' style='text-decoration: none;' download>Download <i class='fas fa-download'></i></a> </td>
 
-										<td id = 'size'>  </td>
-                                            
-									</tr>
+                                    <td> <a href='home' style='text-decoration: none;'> Go To Menu <i class='fas fa-external-link-alt'></i></td>
+                                
+                                </tr>
 								";
 
 								$arrayCounter++;
-								
-								echo "<a href='$filePath$row[name]' download>Download</a>";
 
 							}
 						} else {
@@ -145,12 +180,8 @@
 						$ip = gethostbyname($host);
 
 						$qrCodeUrl = "http://".$ip."/ScanIt/home-pages/download.php?path=".$filePath.$_SESSION['fileName'];
-
+						$qrCodeMainUrl = "http://".$ip."/ScanIt/home-pages/download.php?path=".$filePath.$_SESSION['fileName'];
 					?>
-
-					<a href="home">
-						Go Back
-					</a>
 
 				</div><!-- DYNAMIC CONTAINER -->
 				
@@ -167,10 +198,12 @@
 				var qrCode = new QRCode(document.getElementById('qrcode'));
 				qrCode.makeCode(urlValue);
 			}
+
+			function settings() {
+				var box = document.getElementById('settings-box');
+                if (box.style.display === "none") box.style.display = "block";
+                else box.style.display = "none";
+            }
 		</script>
-
-
-
 	</body>
-
 </html>

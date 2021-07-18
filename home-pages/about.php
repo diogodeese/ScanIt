@@ -25,7 +25,7 @@
 
 				<div class="menu-text p-r-30 p-l-30 p-t-50"><!-- MENU TEXT-->
 
-					<img src="/mail_html/images/code.jpg" width="35px" height="35px">SCANIT
+					<div id="qrcode" style="width: fit-content; margin: auto;" class="p-b-15"></div><img src="../images/logo.png" width="auto" height="54px">
 
 				</div><!-- MENU TEXT-->
 
@@ -71,11 +71,11 @@
 
 						</div><!-- ACCOUNT NAME -->
 
-						<div class="account-settings m-r-120"><!-- ACCOUNT SETTINGS --> 
-							
-							<span>
-								<i class="fas fa-cog fa-2x "></i>
-								<i class="fas fa-chevron-down m-t-7 p-l-5"></i>
+						<div class="account-settings gear m-r-120"><!-- ACCOUNT SETTINGS --> 
+
+							<span class="gear" onClick="settings()">
+								<i class="fas fa-cog fa-2x gear"></i>
+								<i class="fas fa-chevron-down gear m-t-7 p-l-5"></i>
 							</span>
 
 						</div><!-- ACCOUNT SETTINGS -->
@@ -105,9 +105,9 @@
                         </p>
                         <br>
                         <p class="about-text">
-                            Not the FBI I swear. We are students of Programming (Gestão e Programação de Sistemas Informáticos) 
+                            We are students of Programming (Gestão e Programação de Sistemas Informáticos) 
                             of the Escola Secundária da Amadora. There's three of us: Alexandre Gomes, Diogo Santos and Vítor Batista,
-                            all of us have ages between 17 and 18 and we are very good looking.  
+                            all of us have ages between 17 and 18.  
                         </p>
 
                         <p class="about-title m-t-35">
@@ -143,9 +143,15 @@
 		<script>
 			window.onload = function generateQR() {
 				urlValue = window.location.assign = "<?php echo $qrCodeUrl; ?>";
-				var qrCode = new QRCode(document.getElementById('qrcode'), { width: 100, height: 100 });
+				var qrCode = new QRCode(document.getElementById('qrcode'), { width: 125, height: 125 });
 				qrCode.makeCode(urlValue);
 			}
+
+			function settings() {
+				var box = document.getElementById('settings-box');
+                if (box.style.display === "none") box.style.display = "block";
+                else box.style.display = "none";
+            }
 		</script>
 		
 	</body>

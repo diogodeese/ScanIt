@@ -145,6 +145,25 @@
 	?>		
 		
 	</body>
+
+	<?php
+			
+		$host= gethostname();
+		$ip = gethostbyname($host);
+	
+		$qrCodeUrl = "http://".$ip."/ScanIt/index";					
+	
+	?>
+	
+	<script src="../js/qrcode.min.js"></script>
+	<script>
+		window.onload = function generateQR() {
+			urlValue = window.location.assign = "<?php echo $qrCodeUrl; ?>";
+			var qrCode = new QRCode(document.getElementById('qrcode'), { width: 125, height: 125 });
+			qrCode.makeCode(urlValue);
+		}
+	</script>
+
 </html>
 
 

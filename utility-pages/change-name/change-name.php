@@ -33,7 +33,7 @@
 			<div class="wrap-login p-l-55 p-r-55 p-t-80 p-b-30">
 				<form class="login-form" action="../../include/verification.php" method="POST">
 				
-					<input type="text" name="id" value="<?php echo $id; ?>">
+					<input type="hidden" name="id" value="<?php echo $id; ?>">
 
 					<span class="login-form-title p-b-37">
 						Change your Username
@@ -66,6 +66,12 @@
 						<button class="login-form-btn" type="submit" name="change_username">
 							Change Username
 						</button>
+					</div>
+
+					<div class="text-center p-t-35">
+						<a href="../../home-pages/home" class="txt2 hov1">
+							Go back
+						</a>
 					</div>
 				</form>
 			</div>

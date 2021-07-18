@@ -25,6 +25,10 @@
     if(empty($_SESSION['username'])) { header('../index'); }
     require('../include/database-connection.php');
 
+	if(empty($_SESSION['username'])) {
+		header('Location: ../index');
+	}
+
 ?>
 
     <body onclick="click()">
@@ -35,11 +39,11 @@
 
 				<div class="menu-text p-r-30 p-l-30 p-t-50"><!-- MENU TEXT-->
 
-				<img src="../images/logo.png" width="auto" height="54px"><div id="qrcode" style="display: inline;"></div>
+					<div id="qrcode" style="width: fit-content; margin: auto;" class="p-b-15"></div><img src="../images/logo.png" width="auto" height="54px">
 
 				</div><!-- MENU TEXT-->
 
-				<div class="menu-bar p-t-125" ><!-- MENU BAR -->
+				<div class="menu-bar p-t-50" ><!-- MENU BAR -->
 
 					<div class="menu-bar-a p-r-20"><!-- MENU BAR A --><!-- TRAOCAR HTML POR PHP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
@@ -65,12 +69,12 @@
 								
 						<div class="chkBox-sort m-l-105"><!-- CHECK BOX AND SORT BY -->
 						
-						<label class="chkBox_container">
+							<label class="chkBox_container">
 
-							<input id="select-all" type="checkbox" onclick="selectAll()">
-							<span class="checkmark"></span>
+								<input id="select-all" type="checkbox" onchange="selectAll()">
+								<span class="checkmark"></span>
 
-						</label>
+							</label>
 
 						</div><!-- CHECK BOX AND SORT BY -->
 
@@ -129,7 +133,7 @@
 
 						</div><!-- ACCOUNT SETTINGS -->
 
-						<div class="settings-box trigger" id="settings-box" style="display: none;"><!-- SETTINGS BOX -->
+						<div class="settings-box" id="settings-box" style="display: none;"><!-- SETTINGS BOX -->
 
 							<div class="change-box trigger">
 								<a href="../utility-pages/change-name/change-name?user=<?php echo $_SESSION['username']; ?>" class="trigger">
@@ -153,36 +157,38 @@
 
 					<div class="table-container m-t-20 m-r-20 m-l-20"><!-- TABLE CONTAINER -->
 
-						<div class="txt-error p-b-10">
-							<?php	
+						<?php	
 
-								if(isset($_GET['error_type'])) { 
+							if(isset($_GET['error_type'])) { 
 
-									$error_type = $_GET['error_type'];
+								echo "<div class='txt-error p-b-10' style='text-align: center; margin: 25px;'>";
 
-									switch($error_type) {
+								$error_type = $_GET['error_type'];
 
-										case 'extension': 
-												echo "<span class='error_message' style='color: red;'>extension</span>";
-											break;
+								switch($error_type) {
 
-										case 'empty_pass': 
-												echo "Empty Password";
-											break;
+									case 'extension': 
+											echo "<span class='error_message'>This extension is not supported</span>";
+										break;
 
-										case 'wrong_user': 
-												echo "This Username does not exist";
-											break;
+									case 'error': 
+											echo "There was an error uploading your file";
+										break;
 
-										case 'wrong_pass': 
-												echo "Wrong Password";
-											break;
-									}
+									case 'size': 
+											echo "File exceeds the limted size";
+										break;
+
+									case 'wrong_pass': 
+											echo "Wrong Password";
+										break;
 								}
 
-							?>
-						</div>
+								echo "</div>";
+							}
 
+						?>
+						
                         <?php
 
                             require('include/file-creation.php');
@@ -221,7 +227,7 @@
                                             <td id='select'>
                                                 <label class='chkBox_container-table'>
 
-													<input type='checkbox' name='checkbox[]' value='".$row['id']."'>
+													<input class='check' type='checkbox' name='checkbox[]' value='".$row['id']."'>
                                                     
                                                     <span class='checkmark-table'></span>
 
@@ -248,7 +254,12 @@
                                     $arrayCounter++;
                                 }
                             } else {
-                                echo "Sem items";
+                                echo "
+									<div class='txt-error p-b-10' style='text-align: center; margin: 25px; font-size: 18px;'>
+										You don't have files yet.
+									</div>
+								";
+
                             }
 
 							echo "<input type='hidden' name='delete' id='delete' value=''>
@@ -268,7 +279,7 @@
 			$host= gethostname();
 			$ip = gethostbyname($host);
 
-			$qrCodeUrl = "http://".$ip."/pap/index";					
+			$qrCodeUrl = "http://".$ip."/ScanIt/index";					
 
 		?>
 
@@ -277,7 +288,7 @@
 		<script>
 			window.onload = function generateQR() {
 				urlValue = window.location.assign = "<?php echo $qrCodeUrl; ?>";
-				var qrCode = new QRCode(document.getElementById('qrcode'), { width: 54, height: 54 });
+				var qrCode = new QRCode(document.getElementById('qrcode'), { width: 125, height: 125 });
 				qrCode.makeCode(urlValue);
 			}
 
@@ -318,6 +329,30 @@
 				document.getElementById('delete').type = 'submit';
 				document.getElementById('delete').click();	
 			}
+
+			function selectAll()
+            {
+
+                var inputs = document.getElementsByClassName("check");
+                var sellAll = document.getElementById("select-all");
+
+
+                if(sellAll.checked === true)
+                {
+                    for (let i = 0; i < inputs.length; i++)
+                    {
+                        inputs[i].checked = true;
+                    }
+                }
+                else
+                {
+                    for (let i = 0; i < inputs.length; i++)
+                    {
+                        inputs[i].checked = false;
+                    }
+                }
+
+            }
         </script>
     </body>
     <?php ob_end_flush(); ?>

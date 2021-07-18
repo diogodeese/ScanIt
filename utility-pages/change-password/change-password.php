@@ -84,6 +84,12 @@
 							Change Password
 						</button>
 					</div>
+
+					<div class="text-center p-t-35">
+						<a href="../../home-pages/home" class="txt2 hov1">
+							Go back
+						</a>
+					</div>
 				</form>
 			</div>
 		</div>	

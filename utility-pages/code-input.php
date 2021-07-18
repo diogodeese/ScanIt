@@ -30,7 +30,9 @@
 
 					<input type="hidden" name="email" value="<?php echo $email ?>">
 
-					<span class="login-form-title p-b-37">Insert your code</span>
+					<span class="login-form-title p-b-20">Insert your code</span>
+
+					<span class="login-form-title p-b-37" style="font-size: 20px;">We send it to your email address</span>
 
 						<div class="txt-error p-b-10">
 						<?php	

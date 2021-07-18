@@ -567,7 +567,7 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 .settings-box{
 	position: absolute;
 	width: 140px;
-	height: 120px;
+	height: 80px;
 	border: 1px solid black;
 	z-index: 5;
 	right: 45px;
@@ -661,6 +661,60 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 .error_message {
 	color: red;
 }
+
+
+/*===================TRASH===========================*/
+
+
+.qr-image-container
+{
+    width: 100%;
+    margin: auto;
+    max-height: 800px;
+    max-width: 70%;
+	height: 500px;
+	margin-bottom: 50px;
+	margin-top: 30px;
+}
+
+.image-qrPage
+{
+    float: left;
+    height: 100%;
+    width: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.image-qrPage img
+{
+    width: auto;
+	max-width: 700px;
+	max-height: 100%;
+}
+
+.qr-qrPage
+{
+    width: 50%;
+    height: 100%;
+    position: relative;
+	float: right;
+	display: flex;
+  	justify-content: center;
+ 	align-items: center;
+}
+
+.table-content i {
+	font-size: 14px;
+	color: #000;
+}
+
+.table-content a {
+	font-size: 17px;
+	color: #000;
+}
+
 
 /*____________MEDIA___________*/
 
@@ -895,6 +949,10 @@ textarea:-ms-input-placeholder { color: #4b2354;}
 	html
 	{
 		height: 100%;
+	}
+
+	#qrcode {
+		display: none;
 	}
 	
 	.page-container
